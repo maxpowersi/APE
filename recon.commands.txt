@@ -1,0 +1,2 @@
+theharvester -d _target_ -b bing,yahoo,google -n -t -l 500> _output_/_target_/recon/_target_.harvester.txt
+sublist3r -d _target_ -o _output_/_target_/recon/_target_.sublist3r.txt
