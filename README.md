@@ -1,4 +1,3 @@
-{::nomarkdown}
 <img src="https://github.com/maxpowersi/ape/raw/master/logo.png" width="150" height="150">
 {:/}
 # APE v0.11b
