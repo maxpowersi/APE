@@ -1,4 +1,4 @@
-![](https://github.com/maxpowersi/ape/raw/master/logo.png =150x150)
+![alt tag](https://github.com/maxpowersi/ape/raw/master/logo.png =150x150)
 # APE v0.11b
 APE (in spanish "Asistente de Pentest Externo"), is an assistant tool for external pentest. It is distributed under the GNU GPLv3 license.
 ## Examples
