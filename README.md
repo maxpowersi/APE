@@ -51,6 +51,7 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 - wpscan
 - waybackurls
 - linkfinder
+- gobuster
 ### HTTPS
 - testssl
 - sslscan

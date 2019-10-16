@@ -1,0 +1,1 @@
+gobuster dir --url http://example.com --wordlist brute-force/common.txt
