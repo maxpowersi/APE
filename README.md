@@ -91,7 +91,7 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 	- rdp-ntlm-info
 	- smb-protocols
 	-  smb-enum-shares
-	- smb-vuln-ms17-010`
+	- smb-vuln-ms17-010
 ### Adding new tools
 You can add you own tools, editing the files "{service}.commands.txt". 
 >Note: Please consider that this module can run more tools than nmap if the "scan.commands.txt" file is modified, but only can "parse" nmap outputs.
