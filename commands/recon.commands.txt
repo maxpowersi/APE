@@ -1,3 +1,4 @@
-theharvester -d _target_ -b bing,yahoo,google -n -t -l 500> _output_/_target_/recon/_target_.harvester.txt
-sublist3r -d _target_ -o _output_/_target_/recon/_target_.sublist3r.subdomain.txt
-amass.exe enum -d _target_ -oA _output_/_target_/recon/_target_.amass.subdomain
+theharvester -d _target_ -b google,bing,yahoo,censys,crtsh,netcraft > _target_.harvester.txt
+amass.exe enum -d _target_ -oA _target_.amass.subdomain
+sublist3r -d _target_ -o _target_.sublist3r.subdomain.txt -e yahoo,baidu,google,bing,ask,netcraft,virustotal,threatcrowd,ssl,passivedns
+subfinder -d _target_ -o _target_.subfinder.subdomain.txt --exclude-sources dnsdumpster,waybackarchive

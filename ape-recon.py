@@ -6,9 +6,9 @@ import os
 #Writte the hello banner
 def banner():
     print """
-    +-+-+-+-+-+-+-+-+-+
+    +-+-+-+-+-+-+-+-+-
     |A|P|E| |v|0|.|1b|
-    +-+-+-+-+-+-+-+-+-+
+    +-+-+-+-+-+-+-+-+-
     """
 
 #Writte to the console using colors
@@ -17,7 +17,8 @@ def consoleWritte(msg):
 
 #Pars all args
 def parseArgs():
-    parser = argparse.ArgumentParser(description="", version="0.1b")
+    parser = argparse.ArgumentParser(description="", version="0.12b")
+
     parser.add_argument('-t',action="store", dest="target", help="the target to perform recon", required=True)
     parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)
     parser.add_argument('-th', action="store", dest="threads", help="number of threads", required=True)
@@ -27,8 +28,7 @@ def parseArgs():
         print "The argument -t (target) is invalid"
         sys.exit()
 
-    folder = os.path.dirname(parameters.outputDir)
-    if not os.path.exists(folder):
+    if not os.path.exists(parameters.outputDir):
         print "The argument -o (output dir) is invalid"
         sys.exit()
 
@@ -39,77 +39,99 @@ def parseArgs():
     return parameters
 
 #Create project folder if this does not exist
-def createProjectFolder(parameters):
-    folder = parameters.outputDir + parameters.target
-    if not os.path.exists(folder):
-        myCmd = "mkdir {OUTPUT}/{TARGET}"
-        myCmd = myCmd.replace("{TARGET}", parameters.target)
-        myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
-        os.system(myCmd)
-        os.system(myCmd + "/recon")
-        os.system(myCmd + "/recon/dig")
-        consoleWritte("--- The project folder was create ---")
-    else:
-        consoleWritte("--- The project folder exists ---")
+def createProjectFolder(projectDir, reconPath, digPath):    
+    consoleWritte("--- Creating project folder ---")
+
+    if not os.path.exists(projectDir):
+        os.system("mkdir " + projectDir)
+
+    if not os.path.exists(reconPath):
+        os.system("mkdir " + reconPath)
+
+    if not os.path.exists(digPath):
+        os.system("mkdir " + digPath)
+
+    consoleWritte("--- The project folders were created ---")
+    return projectDir
 
 #Run recon tools
-def reconTools(parameters):
+def reconTools(reconPath, apePath, threads, target):
     consoleWritte("--- Starting the recon scan ---")
-    myCmd = "interlace -t {TARGET} -o {OUTPUT} -cL commands/recon.commands.txt -threads {THREADS}"
-    myCmd = myCmd.replace("{TARGET}", parameters.target)
-    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
-    myCmd = myCmd.replace("{THREADS}", parameters.threads)
+        
+    myCmd = "cd '{RECON_PATH}'; interlace -t '{TARGET}' -o '{RECON_PATH}' -cL '{APE_PATH}/commands/recon.commands.txt' -threads {THREADS}"   
+    myCmd = myCmd.replace("{RECON_PATH}", reconPath)
+    myCmd = myCmd.replace("{APE_PATH}", apePath)
+    myCmd = myCmd.replace("{THREADS}", threads)
+    myCmd = myCmd.replace("{TARGET}", target)
     os.system(myCmd)
+
     consoleWritte("--- The recon scan was run ---")
 
 #Merge subdomains outputs in order to create "subdomains.txt"
-def mergeSubdomains(parameters):
+def mergeSubdomains(reconPath):
     consoleWritte( "--- Starting mergin all subdomains ---")
-    #subdomains = "{OUTPUT}" + "/" + "{PROJECT_NAME}" + "/recon/" + "{PROJECT_NAME}" + ".sublist3r.txt".replace("{PROJECT_NAME}", parameters.target).replace("{OUTPUT}", parameters.outputDir)
-    myCmd = "cd {OUTPUT}/{PROJECT_NAME}/recon/; cat *.subdomain.txt > {OUTPUT}/{PROJECT_NAME}/recon/subdomains-tmp.txt"
-    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
-    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
+
+    subdomainsFile = "{RECON_PATH}/subdomains.txt".replace("{RECON_PATH}", reconPath)
+
+    myCmd = "cd {RECON_PATH}; cat *.subdomain.txt > {RECON_PATH}/subdomains-tmp.txt".replace("{RECON_PATH}", reconPath)
     os.system(myCmd)
-    myCmd = "(sort  {OUTPUT}/{PROJECT_NAME}/recon/subdomains-tmp.txt | uniq -u) >  {OUTPUT}/{PROJECT_NAME}/recon/subdomains.txt"
-    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
-    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
+    
+    myCmd = ("(sort {RECON_PATH}/subdomains-tmp.txt | uniq -u) > " + subdomainsFile).replace("{RECON_PATH}", reconPath)
     os.system(myCmd)
-    myCmd = "rm {OUTPUT}/{PROJECT_NAME}/recon/subdomains-tmp.txt"
-    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
-    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
+    
+    myCmd = "rm {RECON_PATH}/subdomains-tmp.txt".replace("{RECON_PATH}", reconPath)
     os.system(myCmd)
+
     consoleWritte("--- the merged file was created ---")
+    return subdomainsFile
 
 #Resolve each subdomain in "subdomains.txt"
-def resolveDomain(parameters, subdomains):
+def resolveDomain(subdomains, digPath, apePath, threads):
     consoleWritte("--- Starting dig for each subdomains ---")
-    myCmd = "interlace -tL {SUBDOMAINS_LIST} -o {OUTPUT} -cL commands/resolve.command.txt -threads {THREADS} -p {PROJECT_NAME}".replace("{SUBDOMAINS_LIST}", subdomains)
-    myCmd = myCmd.replace("{THREADS}", parameters.threads)
-    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
-    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
+
+    myCmd = "interlace -tL '{SUBDOMAINS_LIST}' -o '{DIG_PATH}' -cL '{APE_PATH}/commands/resolve.command.txt' -threads {THREADS}"
+    myCmd = myCmd.replace("{SUBDOMAINS_LIST}", subdomains)
+    myCmd = myCmd.replace("{DIG_PATH}", digPath)
+    myCmd = myCmd.replace("{APE_PATH}", apePath)
+    myCmd = myCmd.replace("{THREADS}", threads)    
     os.system(myCmd)
-    myCmd = "rm -r {OUTPUT}/{PROJECT_NAME}/recon/dig"
-    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
-    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
-    os.system(myCmd)
-    consoleWritte("--- all subdomains were resolved ---")
+
+    consoleWritte("--- All subdomains were resolved ---")
 
 #Concate IPs to one file, "ips.txt"and "ips-unique.txt"
-def concatenateIPs(parameters):
+def concatenateIPs(reconPath, digPath):
     consoleWritte("--- Creating IP file ---")
-    myCmd = "cd {OUTPUT}/{PROJECT_NAME}/recon/dig/; cat *.dig.txt > {OUTPUT}/{PROJECT_NAME}/recon/ips_list.txt"
-    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
-    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
+
+    myCmd = "cd {DIG_PATH}; cat *.dig.txt > {RECON_PATH}/ips.txt"
+    myCmd = myCmd.replace("{RECON_PATH}", reconPath)
+    myCmd = myCmd.replace("{DIG_PATH}", digPath)
     os.system(myCmd)
-    myCmd = "(sort  {OUTPUT}/{PROJECT_NAME}/recon/ips.txt | uniq -u) >  {OUTPUT}/{PROJECT_NAME}/recon/ips-unique.txt"
-    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
-    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
-    consoleWritte("The IP file was created")
+
+    myCmd = "(awk 'NF > 0' {RECON_PATH}/ips.txt | uniq) > {RECON_PATH}/ips-unique.txt"
+    myCmd = myCmd.replace("{RECON_PATH}", reconPath)
+    os.system(myCmd)
+
+    myCmd = "rm -r {DIG_PATH}"
+    myCmd = myCmd.replace("{DIG_PATH}", digPath)
+    os.system(myCmd)
+
+    consoleWritte("--- The IP file was created ---")
+
 
 banner()
 parameters = parseArgs()
-createProjectFolder(parameters)
-reconTools(parameters)
-subdomains = mergeSubdomains(parameters)
-resolveDomain(parameters, subdomains)
-concatenateIPs(parameters)
+
+threads = parameters.threads
+target = parameters.target
+
+#no "/" at ends
+apePath = os.path.dirname(os.path.realpath(__file__))
+projectPath = os.path.join(parameters.outputDir, target)
+reconPath = os.path.join(projectPath, "recon")
+digPath = os.path.join(projectPath, "recon/dig")
+
+createProjectFolder(projectPath, reconPath, digPath)
+reconTools(reconPath, apePath, threads, target)
+subdomains = mergeSubdomains(reconPath)
+resolveDomain(subdomains, digPath, apePath, threads)
+concatenateIPs(reconPath, digPath)

@@ -54,6 +54,7 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 - sslscan
 ### SSH
 - ncrack
+- ssh-user-enumeration
 - nmap scripts
 	- banner
 	- ssh-audit
