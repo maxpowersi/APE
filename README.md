@@ -9,6 +9,8 @@ APE (in spanish "Asistente de Pentest Externo"), is an assistant tool for extern
 - dig (unix tool)
 - nmap 
 - pip install validators
+- interlace
+- nmap-parse-output
 >Check the default tools in each module, and check that you have all tools and they are accessible by the command line in the path var.
 ## Recon module
 This module will run all recon tools in the file "recon.commands.txt". By default this module run the following tools:

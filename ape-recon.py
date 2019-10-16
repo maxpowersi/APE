@@ -56,42 +56,56 @@ def createProjectFolder(parameters):
 #Run recon tools
 def reconTools(parameters):
     consoleWritte("--- Starting the recon scan ---")
-    myCmd = "interlace -t {TARGET} -o {OUTPUT} -cL recon.commands.txt -threads {THREADS}"
+    myCmd = "interlace -t {TARGET} -o {OUTPUT} -cL commands/recon.commands.txt -threads {THREADS}"
     myCmd = myCmd.replace("{TARGET}", parameters.target)
     myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
     myCmd = myCmd.replace("{THREADS}", parameters.threads)
     os.system(myCmd)
     consoleWritte("--- The recon scan was run ---")
 
-#Merge subdomains outputs
+#Merge subdomains outputs in order to create "subdomains.txt"
 def mergeSubdomains(parameters):
     consoleWritte( "--- Starting mergin all subdomains ---")
-    subdomains = "{OUTPUT}" + "/" + "{PROJECT_NAME}" + "/recon/" + "{PROJECT_NAME}" + ".sublist3r.txt".replace("{PROJECT_NAME}", parameters.target).replace("{OUTPUT}", parameters.outputDir)
+    #subdomains = "{OUTPUT}" + "/" + "{PROJECT_NAME}" + "/recon/" + "{PROJECT_NAME}" + ".sublist3r.txt".replace("{PROJECT_NAME}", parameters.target).replace("{OUTPUT}", parameters.outputDir)
+    myCmd = "cd {OUTPUT}/{PROJECT_NAME}/recon/; cat *.subdomain.txt > {OUTPUT}/{PROJECT_NAME}/recon/subdomains-tmp.txt"
+    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
+    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
+    os.system(myCmd)
+    myCmd = "(sort  {OUTPUT}/{PROJECT_NAME}/recon/subdomains-tmp.txt | uniq -u) >  {OUTPUT}/{PROJECT_NAME}/recon/subdomains.txt"
+    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
+    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
+    os.system(myCmd)
+    myCmd = "rm {OUTPUT}/{PROJECT_NAME}/recon/subdomains-tmp.txt"
+    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
+    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
+    os.system(myCmd)
     consoleWritte("--- the merged file was created ---")
 
-#Resolve each subdomain
+#Resolve each subdomain in "subdomains.txt"
 def resolveDomain(parameters, subdomains):
     consoleWritte("--- Starting dig for each subdomains ---")
-    myCmd = "interlace -tL {SUBDOMAINS_LIST} -o {OUTPUT} -c 'ip=$(dig +short _target_ | head -n 1); if [ $ip ] ; then echo $ip; else echo '\n'; fi > _output_/_port_/recon/dig/_target_.dig.txt' -threads {THREADS} -p {PROJECT_NAME}".replace("{SUBDOMAINS_LIST}", subdomains)
+    myCmd = "interlace -tL {SUBDOMAINS_LIST} -o {OUTPUT} -cL commands/resolve.command.txt -threads {THREADS} -p {PROJECT_NAME}".replace("{SUBDOMAINS_LIST}", subdomains)
     myCmd = myCmd.replace("{THREADS}", parameters.threads)
+    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
+    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
+    os.system(myCmd)
+    myCmd = "rm -r {OUTPUT}/{PROJECT_NAME}/recon/dig"
     myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
     myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
     os.system(myCmd)
     consoleWritte("--- all subdomains were resolved ---")
 
-#Concate IPs to one file
+#Concate IPs to one file, "ips.txt"and "ips-unique.txt"
 def concatenateIPs(parameters):
     consoleWritte("--- Creating IP file ---")
     myCmd = "cd {OUTPUT}/{PROJECT_NAME}/recon/dig/; cat *.dig.txt > {OUTPUT}/{PROJECT_NAME}/recon/ips_list.txt"
     myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
     myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
     os.system(myCmd)
+    myCmd = "(sort  {OUTPUT}/{PROJECT_NAME}/recon/ips.txt | uniq -u) >  {OUTPUT}/{PROJECT_NAME}/recon/ips-unique.txt"
+    myCmd = myCmd.replace("{PROJECT_NAME}", parameters.target)
+    myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
     consoleWritte("The IP file was created")
-
-#Run network scan tools
-def networkScanTools(parameters):
-    consoleWritte("--- Starting the network scan ---")
-    consoleWritte("---  Network scan was run ---")
 
 banner()
 parameters = parseArgs()
@@ -100,4 +114,3 @@ reconTools(parameters)
 subdomains = mergeSubdomains(parameters)
 resolveDomain(parameters, subdomains)
 concatenateIPs(parameters)
-networkScanTools(parameters)
