@@ -1,1 +1,0 @@
-nmap.exe -sSV -O --top-ports 1000 _target_ -oA _output_/_target_
