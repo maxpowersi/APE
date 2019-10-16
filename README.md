@@ -49,7 +49,6 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 - wappalyzer
 - nikto
 - retire
-- wpscan
 - waybackurls
 - linkfinder
 - gobuster
