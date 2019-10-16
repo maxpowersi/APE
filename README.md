@@ -7,6 +7,7 @@ APE (in spanish "Asistente de Pentest Externo"), is an assistant tool for extern
 - cat (unix tool)
 - head (unix tool)
 - dig (unix tool)
+- unique (unix tool)
 - nmap 
 - pip install validators
 - interlace
