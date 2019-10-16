@@ -17,6 +17,7 @@ This module will run all recon tools in the file "recon.commands.txt". By defaul
 - The Harvester
 - Sublist3r
 - OWASP amass
+- Subfinder
 
 After run the default tools, APE will create a folder with the domain in scope and a folder inside called "recon". In this folder a file called "subdomains.txt" will be created containing all enumerated subdomains (this file concatenate all files ending in ".subdomain.txt". A file called "ips.txt" will be created with the IP for each subdomain in the "subdomains.txt" file. Finally a file called "ips-unique.txt" will be created, ready to use in APE Scan module or in nmap or masscan.
 
@@ -47,8 +48,9 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 - wappalyzer
 - nikto
 - retire
--  wpscan
-- OWASP ZAP
+- wpscan
+- waybackurls
+- linkfinder
 ### HTTPS
 - testssl
 - sslscan
