@@ -87,7 +87,6 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 	- rdp-ntlm-info
 	- rdp-vuln-ms12-020
 ### SMB
-- XXX
 - nmap scripts
 	- rdp-ntlm-info
 	- smb-protocols
@@ -96,3 +95,16 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 ### Adding new tools
 You can add you own tools, editing the files "{service}.commands.txt". 
 >Note: Please consider that this module can run more tools than nmap if the "scan.commands.txt" file is modified, but only can "parse" nmap outputs.
+### Examples
+```
+usage: ape-scan.py [-h] [-v] -t TARGET -o OUTPUTDIR -th THREADS
+
+  -h, --help     show this help message and exit
+  -v, --version  show program's version number and exit
+  -t TARGET      text file with all IPs in scope
+  -o OUTPUTDIR   path to place all outputs
+  -th THREADS    number of threads
+```
+```
+ape-scan.py -t domain.com/recon/ips-unique.txt -o OUTPUTDIR -th THREADS
+```
