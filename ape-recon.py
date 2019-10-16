@@ -47,7 +47,6 @@ def createProjectFolder(parameters):
         myCmd = myCmd.replace("{OUTPUT}", parameters.outputDir)
         os.system(myCmd)
         os.system(myCmd + "/recon")
-        os.system(myCmd + "/scan")
         os.system(myCmd + "/recon/dig")
         consoleWritte("--- The project folder was create ---")
     else:
