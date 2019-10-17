@@ -15,7 +15,7 @@ APE (in spanish "Asistente de Pentest Externo"), is an assistant tool for extern
 >Check the default tools in each module, and check that you have all tools and they are accessible by the command line in the path var.
 ## Recon module
 This module will run all recon tools in the file "recon.commands.txt". By default this module run the following tools:
-- The Harvester
+- The Harves
 - Sublist3r
 - OWASP amass
 - Subfinder
@@ -53,6 +53,7 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 - phantomJS
 - aquatone
 - wappalyzer
+- webtech
 - nikto
 - retire
 - waybackurls
@@ -60,8 +61,9 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 - photon
 - gobuster
 - opendoor
-- webtech
 - virtual-host-discovery
+- GoogD0rker
+- Goohak
 ### HTTPS
 - testssl
 - sslscan
