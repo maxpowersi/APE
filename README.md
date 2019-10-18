@@ -19,7 +19,7 @@ sudo ./setup.sh
 ```
 ## Recon module
 This module will run all recon tools in the file "recon.commands.txt". By default this module run the following tools:
-- The Harves
+- The Harvester
 - Sublist3r
 - OWASP amass
 - Subfinder
