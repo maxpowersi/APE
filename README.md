@@ -12,11 +12,14 @@ APE (in spanish "Asistente de Pentest Externo"), is an assistant tool for extern
 - interlace
 - nmap-parse-output
 - All tools run in recon and scan module.
->Check the default tools in each module, and check that you have all tools and they are accessible by the command line in the path var.
 ## Installation
+The setup.sh script will try to install all tools and dependencies.
 ```
+git clone https://github.com/maxpowersi/APE.git
+cd APE
 sudo ./setup.sh
 ```
+>Check the default tools in each module, and check that you have all tools and they are accessible by the command line in the path var. Some of the tools can not be installed in this script, you will have to install mannualy and add it to the path.
 ## Recon module
 This module will run all recon tools in the file "recon.commands.txt". By default this module run the following tools:
 - The Harvester
