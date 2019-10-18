@@ -21,7 +21,7 @@ def parseArgs():
 
     parser.add_argument('-t',action="store", dest="targets", help="list of IPs in scope, in a text file", required=True)
     parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)
-    parser.add_argument('-th', action="store", dest="threads", help="number of threads", required=True)
+    parser.add_argument('-q', action="store", dest="queued", help="number of queued, each queued will process one resource (IP or subdomain)", required=True)
     parameters = parser.parse_args()
 
     if not validators.domain(parameters.targets):
@@ -32,11 +32,14 @@ def parseArgs():
         print "The argument -o (output dir) is invalid"
         sys.exit()
 
-    if not validators.between(int(parameters.threads), min=1, max=50):
-        print "The argument -th (threads) is invalid, min 1, max 50"
+    if not validators.between(int(parameters.queued), min=1, max=50):
+        print "The argument -q (queued) is invalid, min 1, max 50"
         sys.exit()
     
     return parameters
 
 banner()
 parameters = parseArgs()
+queued = parameters.queued
+targets = parameters.targets
+projectDir = parameters.outputDir

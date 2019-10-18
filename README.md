@@ -47,7 +47,7 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 >Note: Please observe  that (by default) each dictionary used by ncrack is called:
 "usernames.{service}.txt and passwords.{service}.txt". For example:
 "usernames.ftp.txt" is for ftp service.
-### HTTP
+### HTTP/S
 - curl
 - httprobe
 - phantomJS
@@ -64,7 +64,6 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 - virtual-host-discovery
 - GoogD0rker
 - Goohak
-### HTTPS
 - testssl
 - sslscan
 ### SSH
@@ -108,21 +107,21 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 - nmap scripts
 	- rdp-ntlm-info
 	- smb-protocols
-	-  smb-enum-shares
+	- smb-enum-shares
 	- smb-vuln-ms17-010
 ### Adding new tools
 You can add you own tools, editing the files "{service}.commands.txt". 
 >Note: Please consider that this module can run more tools than nmap if the "scan.commands.txt" file is modified, but only can "parse" nmap outputs.
 ### Examples
 ```
-usage: ape-scan.py [-h] [-v] -t TARGET -o OUTPUTDIR -th THREADS
+usage: ape-scan.py [-h] [-v] -t TARGET -o OUTPUTDIR -q QUEUED
 
   -h, --help     show this help message and exit
   -v, --version  show program's version number and exit
   -t TARGET      text file with all IPs in scope
   -o OUTPUTDIR   path to place all outputs
-  -th THREADS    number of threads
+  -q QUEUED      number of queued, each queued will process one resource (IP or subdomain)
 ```
 ```
-ape-scan.py -t domain.com/recon/ips-unique.txt -o OUTPUTDIR -th THREADS
+ape-scan.py -t domain.com/recon/ips-unique.txt -o /home/hacker-man -q 30
 ```
