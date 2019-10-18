@@ -2,17 +2,21 @@
 <img  src="https://github.com/maxpowersi/ape/raw/master/logo.png"  width="150"  height="150">.
 # APE v0.12b
 APE (in spanish "Asistente de Pentest Externo"), is an assistant tool for external pentest. This tool has two modules, recon and scan. Recon module can be used to lunch many tools for recon, and get info (for example subdomains) throug a domain. Scan module, run nmap scan and parse the result in order to run special tools (customizable) for each service. This tool is distributed under the GNU GPLv3 license.
-## Basic Requirements
+## Requirements
 - python
 - cat (unix tool)
 - head (unix tool)
 - dig (unix tool)
 - unique (unix tool)
-- nmap 
-- pip install validators
+- nmap
 - interlace
 - nmap-parse-output
+- All tools run in recon and scan module.
 >Check the default tools in each module, and check that you have all tools and they are accessible by the command line in the path var.
+## Installation
+```
+sudo ./setup.sh
+```
 ## Recon module
 This module will run all recon tools in the file "recon.commands.txt". By default this module run the following tools:
 - The Harves
