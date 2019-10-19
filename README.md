@@ -6,14 +6,15 @@ APE (in spanish "Asistente de Pentest Externo"), is an assistant tool for extern
 - python
 - cat (unix tool)
 - head (unix tool)
+- sort (unix tool)
 - dig (unix tool)
-- unique (unix tool)
-- nmap
 - interlace
+- nmap
 - nmap-parse-output
 - All tools run in recon and scan module.
 ## Installation
-The setup.sh script will try to install all tools and dependencies.
+The setup.sh script will try to install all tools and dependencies. <br/>
+**TODO: improve this script**
 ```
 git clone https://github.com/maxpowersi/APE.git
 cd APE
@@ -37,16 +38,21 @@ After run the default tools, APE will create a folder with the domain in scope a
 You can add you own tools, editing the file "recon.commands.txt". If the tool added generates subdomains, please the output name must end in ".subdomain.txt" to be included in the output  file "subdomains.txt"
 ### Examples
 ```
-usage: ape-recon.py [-h] [-v] -t TARGET -o OUTPUTDIR -th THREADS
+    +-+-+-+-+-+-+-+-+-
+    |A|P|E| |v|0|.|12b|
+    +-+-+-+-+-+-+-+-+-
 
-  -h, --help     show this help message and exit
-  -v, --version  show program's version number and exit
-  -t TARGET      the target to perform recon
-  -o OUTPUTDIR   path to place all outputs
-  -th THREADS    number of threads
+usage: ape-recon.py [-h] [-v] -t TARGET -o OUTPUTDIR -ip CREATEIPFILE
+
+optional arguments:
+  -h, --help        show this help message and exit
+  -v, --version     show program's version number and exit
+  -t TARGET         the target to perform recon
+  -o OUTPUTDIR      path to place all outputs
+  -ip CREATEIPFILE  resolve subdomains and generate IPs files
 ```
 ```
-ape-recon.py -t "domain.com" -o "/home/user/folder-output" -th 5
+ape-recon.py -t "domain.com" -o "/home/user/folder-output" -ip true
 ```
 ## Scan module
 This module will run all recon tools in the file "scan.commands.txt". By default this module run nmap. After run the scan tools, this module will run each "{service}.commands.txt" file, to scan each target in scope using the output nmap. By default, for each service the following tools will be run:
@@ -121,14 +127,18 @@ You can add you own tools, editing the files "{service}.commands.txt".
 >Note: Please consider that this module can run more tools than nmap if the "scan.commands.txt" file is modified, but only can "parse" nmap outputs.
 ### Examples
 ```
-usage: ape-scan.py [-h] [-v] -t TARGET -o OUTPUTDIR -q QUEUED
+    +-+-+-+-+-+-+-+-+-    
+	|A|P|E| |v|0|.|12b|
+    +-+-+-+-+-+-+-+-+-
 
-  -h, --help     show this help message and exit
+usage: ape-scan.py [-h] [-v] -t TARGETS -o OUTPUTDIR -q QUEUED
+
+optional arguments:  -h, --help     show this help message and exit
   -v, --version  show program's version number and exit
-  -t TARGET      text file with all IPs in scope
-  -o OUTPUTDIR   path to place all outputs
-  -q QUEUED      number of queued, each queued will process one resource (IP or subdomain)
+  -t TARGETS     list of IPs in scope, in a text file  -o OUTPUTDIR   path to place all outputs
+  -q QUEUED      number of queued, each queued will process one resource (IP
+                 or subdomain)
 ```
 ```
-ape-scan.py -t domain.com/recon/ips-unique.txt -o /home/hacker-man -q 30
+ape-scan.py -t "/home/user/domain.com/recon/ips-unique.txt" -o "/home/user/domain.com/ -q 30
 ```

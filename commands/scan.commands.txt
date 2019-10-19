@@ -1,1 +1,3 @@
-nmap.exe -sSV -O --top-ports 1000 _target_ -oA _output_/_target_
+_block:nmap_
+nmap.exe -sSV -O --top-ports 1000 _target_ -oA _output_/nmap/_target_
+_block:nmap_
