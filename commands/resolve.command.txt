@@ -1,1 +1,0 @@
-ip=$(dig +short _target_ | head -n 1); if [ $ip ] ; then echo $ip; else echo '\n'; fi > _output_/_target_.dig.txt
