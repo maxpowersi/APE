@@ -47,7 +47,7 @@ digPath = os.path.join(projectPath, "recon/dig")
 subdomainsFile = "{0}/subdomains.txt".format(reconPath)
 now = datetime.datetime.now()
 
-consoleWritte("--- Creating project folder ---")
+consoleWritte("--- Creating project folders ---")
 if not os.path.exists(projectPath): os.system("mkdir " + projectPath)
 if not os.path.exists(reconPath): os.system("mkdir " + reconPath)
 consoleWritte("--- The project folders were created ---")
