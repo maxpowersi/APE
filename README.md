@@ -21,6 +21,7 @@ cd APE
 sudo ./setup.sh
 ```
 >Check the default tools in each module, and check that you have all tools and they are accessible by the command line in the path var. Some of the tools can not be installed in this script, you will have to install mannualy and add it to the path.
+
 ## Recon module
 This module will run all recon tools in the file "recon.commands.txt". By default this module run the following tools:
 - The Harvester
@@ -35,24 +36,6 @@ After run the default tools, APE will create a folder with the domain in scope a
 
 ### Adding new tools
 You can add you own tools, editing the file "recon.commands.txt". If the tool added generates subdomains, please the output name must end in ".subdomain.txt" to be included in the output  file "subdomains.txt"
-### Examples
-```
-    +-+-+-+-+-+-+-+-+-
-    |A|P|E| |v|0|.|12b|
-    +-+-+-+-+-+-+-+-+-
-
-usage: ape-recon.py [-h] [-v] -t TARGET -o OUTPUTDIR -ip CREATEIPFILE
-
-optional arguments:
-  -h, --help        show this help message and exit
-  -v, --version     show program's version number and exit
-  -t TARGET         the target to perform recon
-  -o OUTPUTDIR      path to place all outputs
-  -ip CREATEIPFILE  resolve subdomains and generate IPs files
-```
-```
-ape-recon.py -t "domain.com" -o "/home/user/folder-output" -ip true
-```
 ## Scan module
 This module will run all recon tools in the file "scan.commands.txt". By default this module run nmap. After run the scan tools, this module will run each "{service}.commands.txt" file, to scan each target in scope using the output nmap. By default, for each service the following tools will be run:
 
@@ -124,20 +107,39 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 ### Adding new tools
 You can add you own tools, editing the files "{service}.commands.txt". 
 >Note: Please consider that this module can run more tools than nmap if the "scan.commands.txt" file is modified, but only can "parse" nmap outputs.
+## All module
+This module will run recon module, and when it finish, it will start scan module, using the output from recon module.
 ### Examples
+## Help
 ```
-    +-+-+-+-+-+-+-+-+-    
-	|A|P|E| |v|0|.|12b|
-    +-+-+-+-+-+-+-+-+-
++-+-+-+-+-+-+-+-+-
+|A|P|E| |v|0|.|15b|
++-+-+-+-+-+-+-+-+-
 
-usage: ape-scan.py [-h] [-v] -t TARGETS -o OUTPUTDIR -q QUEUED
+usage: ape.py [-h] [-v] -m MODULE -t TARGET -o OUTPUTDIR -q QUEUED
+              [-ip CREATEIPFILE]
 
-optional arguments:  -h, --help     show this help message and exit
-  -v, --version  show program's version number and exit
-  -t TARGETS     list of IPs in scope, in a text file  -o OUTPUTDIR   path to place all outputs
-  -q QUEUED      number of queued, each queued will process one resource (IP
-                 or subdomain)
+optional arguments:
+  -h, --help        show this help message and exit
+  -v, --version     show program's version number and exit
+  -m MODULE         module name, it must be recon, scan or all
+  -t TARGET         target, for recon it must be a domain, for scan it must be
+                    a text file with subdomains or IPs
+  -o OUTPUTDIR      path to place all outputs
+  -q QUEUED         number of queued or threads, each queued will process one
+                    resource (IP or subdomain)
+  -ip CREATEIPFILE  resolve subdomains and generate IPs file
 ```
+## Recon
 ```
-ape-scan.py -t "/home/user/domain.com/recon/ips-unique.txt" -o "/home/user/domain.com/ -q 30
+ape.py -m recon -t "domain.com" -o "/home/user/" -q 30 -ip true
 ```
+## Scan
+```
+ape.py -m scan -t "/home/user/domain.com/recon/ips-unique.txt" -o "/home/user/domain.com/ -q 30
+```
+## All
+```
+ape.py -m all -t "domain.com" -o "/home/user/" -q 30 -ip true
+```
+https://de203.sabameeting.com/GA/main/df0ede6a6ddc45d5a3b292bbc4eb1f87
