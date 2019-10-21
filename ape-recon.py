@@ -60,8 +60,8 @@ consoleWritte("--- The recon scan was run ---")
 if(createIpFiles.lower() == "true"):
     if not os.path.exists(digPath): os.system("mkdir " + digPath)
     consoleWritte("--- Starting dig for each subdomains ---")
-    digCommand = "(ip=$(dig +short _target_ | head -n 1); if [ $ip ] ; then echo $ip; else echo '\n'; fi > _output_/_target_.dig.txt) > /dev/null 2>&1"
-    os.system("interlace -tL '{0}' -o '{1}' -c '{2}' -threads 30 > /dev/null".format(subdomainsFile, digPath, digCommand))
+    digCommand = "(IP=$(dig +short _target_ | head -n 1); if [ $IP ] ; then echo $IP; else echo '\n'; fi > _output_/_target_.dig.txt) > /dev/null 2>&1"
+    os.system("interlace -tL '{0}' -o '{1}' -c \"{2}\" -threads 30".format(subdomainsFile, digPath, digCommand))
     os.system("cd {0}; cat *.dig.txt > {1}/ips.txt".format(digPath, reconPath))
     os.system("(sort -u {0}/ips.txt) > {0}/ips-unique.txt".format(reconPath))
     os.system("rm -r {0}".format(digPath))
