@@ -142,4 +142,3 @@ ape.py -m scan -t "/home/user/domain.com/recon/ips-unique.txt" -o "/home/user/do
 ```
 ape.py -m all -t "domain.com" -o "/home/user/" -q 30 -ip true
 ```
-https://de203.sabameeting.com/GA/main/df0ede6a6ddc45d5a3b292bbc4eb1f87
