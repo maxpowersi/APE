@@ -1,3 +1,3 @@
 cd _output_; nmap.exe -sSV -O -vvv --top-ports 1000 _target_ -oA nmap/_target_ > /dev/null
 _blocker_
-echo "Parse nmap output & start the scan for each service"
+cd _output_; servicios=$(nmap-parse-output nmap/_target_.xml service-names | grep ssh); if  [ $servicios ]; then interlace -t _target_ -cL '_realport_/commands/ssh.commands.txt' -o '_output_/ssh'  -p '22, 2222'; fi

@@ -3,6 +3,7 @@ import validators
 import argparse
 import sys
 import os
+import datetime
 
 def consoleWritte(msg):
     print("\x1b[6;30;42m" + msg +  "\x1b[0m")
@@ -33,6 +34,7 @@ parameters = parseArgs()
 queued = parameters.queued
 targets = parameters.targets
 projectPath = parameters.outputDir
+now = datetime.datetime.now()
 
 #no "/" at ends
 apePath = os.path.dirname(os.path.realpath(__file__))
@@ -52,6 +54,8 @@ for servicePath in servicesFolder:
     if not os.path.exists(servicePath): os.system("mkdir " + servicePath)
 consoleWritte("--- The project folders were created ---")
 
-consoleWritte("--- Starting scan tool for each target ---")
-os.system("interlace -tL '{1}' -o '{0}' -cL '{2}/commands/scan.commands.txt' -threads {3}".format(scanPath, targets, apePath, queued))
-consoleWritte("--- The scan was run ---")
+
+consoleWritte("--- Starting scan tool for each target at {0}:{1}:{2} ---".format(now.hour, now.minute, now.second))
+os.system("interlace -tL '{1}' -o '{0}' -cL '{2}/commands/scan.commands.txt' -rp '{4}' -threads {3}".format(scanPath, targets, apePath, queued, apePath))
+now = datetime.datetime.now()
+consoleWritte("--- The scan finished at {0}:{1}:{2} ---".format(now.hour, now.minute, now.second))

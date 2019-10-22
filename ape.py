@@ -57,7 +57,6 @@ createIpFiles = parameters.createIpFile
 if isScan:
     os.system("python '{3}/scan-ape.py' -t '{0}' -o '{1}' -q {2} ".format(target, projectPath, queued, apePath))
 else:
-     os.system("python '{4}/recon-ape.py' -t '{0}' -o '{1}' -ip {2} -q {3}".format(target, projectPath, createIpFiles, queued, apePath))
-     if module == isAll:
-         os.system("python '{3}/scan-ape.py' -t '{0}' -o '{1}' -q {2} "
-            .format(os.path.join(os.path.join(projectPath, target), "recon/subdomains.txt"), projectPath, queued, apePath))
+    os.system("python '{4}/recon-ape.py' -t '{0}' -o '{1}' -ip {2} -q {3}".format(target, projectPath, createIpFiles, queued, apePath))
+    if isAll:
+        os.system("python '{3}/scan-ape.py' -t '{0}' -o '{1}' -q {2} ".format(os.path.join(os.path.join(projectPath, target), "recon/subdomains.txt"), os.path.join(projectPath, target), queued, apePath))

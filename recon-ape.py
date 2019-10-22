@@ -40,12 +40,12 @@ createIpFiles = parameters.createIpFile
 threads = parameters.threads
 
 #no "/" at ends
+now = datetime.datetime.now()
 apePath = os.path.dirname(os.path.realpath(__file__))
 projectPath = os.path.join(parameters.outputDir, target)
 reconPath = os.path.join(projectPath, "recon")
 digPath = os.path.join(projectPath, "recon/dig")
 subdomainsFile = "{0}/subdomains.txt".format(reconPath)
-now = datetime.datetime.now()
 
 consoleWritte("--- Creating project folders ---")
 if not os.path.exists(projectPath): os.system("mkdir " + projectPath)
@@ -68,4 +68,4 @@ if(createIpFiles.lower() == "true"):
     consoleWritte("--- All subdomains were resolved ---")
 
 now = datetime.datetime.now()
-consoleWritte("--- The recon scan finished at {0}:{1}:{2} ---".format(now.hour, now.minute, now.second))
+consoleWritte("--- The recon finished at {0}:{1}:{2} ---".format(now.hour, now.minute, now.second))
