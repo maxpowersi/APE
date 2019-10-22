@@ -8,7 +8,7 @@ subfinder -d _target_ -o _target_.subfinder.subdomain.txt --exclude-sources dnsd
 
 amass.exe enum -d _target_ -oA _target_.amass.subdomain > /dev/null 2>&1
 
-subfinder -d _target_ -o _target_.subfinder.brute.subdomain.txt -b --no-passive -w "_realport_/brute-force/common_subdomains_prefixes.txt" -t 15
+subfinder -d _target_ -o _target_.subfinder.brute.subdomain.txt -b --no-passive -w "_realport_/brute-force/common_subdomains.small.txt" -t 15
 
 timeout 900 gitrob -silent -save "_target_.gitrob.json" "_port_"
 
