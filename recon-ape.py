@@ -53,7 +53,7 @@ if not os.path.exists(reconPath): os.system("mkdir " + reconPath)
 consoleWritte("--- The project folders were created ---")
 
 consoleWritte("--- Starting the recon scan at {0}:{1}:{2} ---".format(now.hour, now.minute, now.second))
-os.system("cd '{0}'; interlace -t '{1}' -o '{0}' -cL '{2}/commands/recon.commands.txt' -rp '{2}' -p {3} -threads {4}"
+os.system("cd '{0}'; interlace --silent -t '{1}' -o '{0}' -cL '{2}/commands/recon.commands.txt' -rp '{2}' -p {3} -threads {4}"
     .format(reconPath, target, apePath, target.split(".")[0], threads))
 consoleWritte("--- The recon scan was run ---")
 
@@ -61,7 +61,7 @@ if(createIpFiles.lower() == "true"):
     if not os.path.exists(digPath): os.system("mkdir " + digPath)
     consoleWritte("--- Starting dig for each subdomains ---")
     digCommand = "(IP=$(dig +short _target_ | head -n 1); if [ $IP ] ; then echo $IP; else echo '\n'; fi > _output_/_target_.dig.txt) > /dev/null 2>&1"
-    os.system("interlace -tL '{0}' -o '{1}' -c \"{2}\" -threads {3}".format(subdomainsFile, digPath, digCommand, threads))
+    os.system("interlace --silent -tL '{0}' -o '{1}' -c \"{2}\" -threads {3}".format(subdomainsFile, digPath, digCommand, threads))
     os.system("cd {0}; cat *.dig.txt > {1}/ips.txt".format(digPath, reconPath))
     os.system("(sort -u {0}/ips.txt) > {0}/ips-unique.txt".format(reconPath))
     os.system("rm -r {0}".format(digPath))

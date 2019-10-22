@@ -40,7 +40,6 @@ now = datetime.datetime.now()
 apePath = os.path.dirname(os.path.realpath(__file__))
 scanPath = os.path.join(projectPath, "scan")
 servicesFolder =  [os.path.join(scanPath, "http"), 
-                    os.path.join(scanPath, "https"), 
                     os.path.join(scanPath, "ftp"),
                     os.path.join(scanPath, "ssh"), 
                     os.path.join(scanPath, "smtp"), 
@@ -56,6 +55,6 @@ consoleWritte("--- The project folders were created ---")
 
 
 consoleWritte("--- Starting scan tool for each target at {0}:{1}:{2} ---".format(now.hour, now.minute, now.second))
-os.system("interlace -tL '{1}' -o '{0}' -cL '{2}/commands/scan.commands.txt' -rp '{4}' -threads {3}".format(scanPath, targets, apePath, queued, apePath))
+os.system("interlace --silent -tL '{1}' -o '{0}' -cL '{2}/commands/scan.commands.txt' -rp '{4}' -threads {3}".format(scanPath, targets, apePath, queued, apePath))
 now = datetime.datetime.now()
 consoleWritte("--- The scan finished at {0}:{1}:{2} ---".format(now.hour, now.minute, now.second))

@@ -1,11 +1,19 @@
 cd _output_; nmap.exe -sSV -O -vvv --top-ports 1000 _target_ -oA nmap/_target_ > /dev/null
+
 _blocker_
-cd _output_; servicios=$(nmap-parse-output nmap/_target_.xml service-names | grep ssh); if  [ $servicios ]; then interlace -t _target_ -cL '_realport_/commands/ssh.commands.txt' -o '_output_/ssh'  -p '22, 2222'; fi
-cd _output_; servicios=$(nmap-parse-output nmap/_target_.xml service-names | grep telnet); if  [ $servicios ]; then interlace -t _target_ -cL '_realport_/commands/telnet.commands.txt' -o '_output_/telnet'  -p '22, 2222'; fi
-cd _output_; servicios=$(nmap-parse-output nmap/_target_.xml service-names | grep ftp); if  [ $servicios ]; then interlace -t _target_ -cL '_realport_/commands/ftp.commands.txt' -o '_output_/ftp'  -p '22, 2222'; fi
-cd _output_; servicios=$(nmap-parse-output nmap/_target_.xml service-names | grep smb); if  [ $servicios ]; then interlace -t _target_ -cL '_realport_/commands/smb.commands.txt' -o '_output_/smb'  -p '22, 2222'; fi
-cd _output_; servicios=$(nmap-parse-output nmap/_target_.xml service-names | grep rdp); if  [ $servicios ]; then interlace -t _target_ -cL '_realport_/commands/rdp.commands.txt' -o '_output_/rdp'  -p '22, 2222'; fi
-cd _output_; servicios=$(nmap-parse-output nmap/_target_.xml service-names | grep dns); if  [ $servicios ]; then interlace -t _target_ -cL '_realport_/commands/dns.commands.txt' -o '_output_/dns'  -p '22, 2222'; fi
-cd _output_; servicios=$(nmap-parse-output nmap/_target_.xml service-names | grep smtp); if  [ $servicios ]; then interlace -t _target_ -cL '_realport_/commands/smtp.commands.txt' -o '_output_/smtp'  -p '22, 2222'; fi
-cd _output_; servicios=$(nmap-parse-output nmap/_target_.xml service-names | grep https); if  [ $servicios ]; then interlace -t _target_ -cL '_realport_/commands/https.commands.txt' -o '_output_/https'  -p '22, 2222'; fi
-cd _output_; servicios=$(nmap-parse-output nmap/_target_.xml service-names | grep http); if  [ $servicios ]; then interlace -t _target_ -cL '_realport_/commands/http.commands.txt' -o '_output_/http'  -p '22, 2222'; fi
+
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'ssh' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/ssh.commands.txt' -o '_output_/ssh' -p "$puertos"; fi
+
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'telnet' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/telnet.commands.txt' -o '_output_/telnet'  -p "$puertos"; fi
+
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'ftp' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/ftp.commands.txt' -o '_output_/ftp' -p "$puertos"; fi
+
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'smtp' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}');if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/smtp.commands.txt' -o '_output_/smtp' -p "$puertos"; fi
+
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'dns' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/dns.commands.txt' -o '_output_/dns' -p "$puertos"; fi
+
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'rdp' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/rdp.commands.txt' -o '_output_/rdp' -p "$puertos"; fi
+
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'smb' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/smb.commands.txt' -o '_output_/smb' -p "$puertos"; fi
+
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'http' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/http.commands.txt' -o '_output_/http' -p "$puertos"; fi
