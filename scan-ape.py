@@ -6,7 +6,7 @@ import os
 import datetime
 
 def consoleWritte(msg):
-    print("\x1b[6;30;42m" + msg +  "\x1b[0m")
+    os.system("printf \"\e[92m--- {0} ---\e[0m\n\"".format(msg))
 
 def parseArgs():
     parser = argparse.ArgumentParser(description="", version="0.12b")
@@ -46,16 +46,18 @@ servicesFolder =  [os.path.join(scanPath, "http"),
                     os.path.join(scanPath, "dns"), 
                     os.path.join(scanPath, "rdp"),
                     os.path.join(scanPath, "ssl"),
+                    os.path.join(scanPath, "ssl/JS"),
+                    os.path.join(scanPath, "http/JS"),
                     os.path.join(scanPath, "nmap")]
 
-consoleWritte("--- Creating project folder ---")
+consoleWritte("Creating project folder")
 if not os.path.exists(scanPath): os.system("mkdir " + scanPath)
 for servicePath in servicesFolder:
     if not os.path.exists(servicePath): os.system("mkdir " + servicePath)
-consoleWritte("--- The project folders were created ---")
+consoleWritte("The project folders were created")
 
 
-consoleWritte("--- Starting scan tool for each target at {0}:{1}:{2} ---".format(now.hour, now.minute, now.second))
+consoleWritte("Starting scan tool for each target at {0}:{1}:{2}".format(now.hour, now.minute, now.second))
 os.system("interlace --silent -tL '{1}' -o '{0}' -cL '{2}/commands/scan.commands.txt' -rp '{4}' -threads {3}".format(scanPath, targets, apePath, queued, apePath))
 now = datetime.datetime.now()
-consoleWritte("--- The scan finished at {0}:{1}:{2} ---".format(now.hour, now.minute, now.second))
+consoleWritte("The scan finished at {0}:{1}:{2}".format(now.hour, now.minute, now.second))

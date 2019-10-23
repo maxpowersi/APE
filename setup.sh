@@ -26,3 +26,4 @@ git clone https://github.com/jobertabma/virtual-host-discovery.git
 go get github.com/tomnomnom/waybackurls
 git clone https://github.com/ZephrFish/GoogD0rker.git
 git clone https://github.com/1N3/Goohak.git
+go get github.com/003random/getJS

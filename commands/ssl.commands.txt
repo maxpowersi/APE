@@ -1,2 +1,17 @@
+printf "\e[92m--- Running ssl commands for _target_:_port_ ---\e[0m" 
+
 sslscan _target_:_port_ >_output_/_target_._port_.sslscan.txt
+
 testssl _target_:_port_ > _output_/_target_._port_.testssl.txt
+
+_block:retire_
+
+getJS -url "https://_target_" -resolve -complete -output "_output_/_target_._port_.getJS.txt"
+
+cd "_output_/JS"; cat "_output_/_target_._port_.getJS.txt" | parallel --gnu "wget {}" /dev/null 2>&1
+
+retire --jspath "_output_/JS/" --outputformat "text" --outputpath "_output_/_target_._port_.retire.txt" 
+
+_block:retire_
+
+nikto -host "https://_target_" -port _port_ > "_output_/_target_._port_.nikto.txt"

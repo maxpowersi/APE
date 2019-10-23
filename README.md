@@ -46,14 +46,17 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 "usernames.{service}.txt and passwords.{service}.txt". For example:
 "usernames.ftp.txt" is for ftp service.
 ### HTTP/S
+- testssl
+- sslscan
+- nikto
+- getJS
+- retire
 - curl
 - httprobe
 - phantomJS
 - aquatone
 - wappalyzer
 - webtech
-- nikto
-- retire
 - waybackurls
 - linkfinder
 - photon
@@ -62,8 +65,6 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 - virtual-host-discovery
 - GoogD0rker
 - Goohak
-- testssl
-- sslscan
 ### SSH
 - ncrack
 - ssh-user-enumeration
