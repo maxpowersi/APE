@@ -1,1 +1,1 @@
-nikto -host _target_ -port _port_
+nikto -host _target_ -port _port_ > _output_/_target_._port_.nikto.txt
