@@ -1,4 +1,4 @@
-printf "\e[92m--- Running nmap scan for _target_ ---\e[0m \n" 
+printf "\e[92m--- Running nmap scan for _target_ ---\e[0m" 
 
 cd _output_; nmap.exe -sSV -O -vvv --top-ports 1000 _target_ -oA nmap/_target_ > /dev/null
 _blocker_
