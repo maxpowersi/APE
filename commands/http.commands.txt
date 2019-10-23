@@ -1,1 +1,1 @@
-echo "_target_:_port_" > _output_/_target_._port_.echo.txt
+nikto -host _target_ -port _port_

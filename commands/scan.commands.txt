@@ -17,3 +17,7 @@ cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'rdp' | cut -
 cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'smb' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/smb.commands.txt' -o '_output_/smb' -p "$puertos"; fi
 
 cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'http' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/http.commands.txt' -o '_output_/http' -p "$puertos"; fi
+
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'ssl' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/http.commands.txt' -o '_output_/ssl' -p "$puertos"; fi
+
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'ssl' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then interlace --silent -t _target_ -cL '_realport_/commands/ssl.commands.txt' -o '_output_/ssl' -p "$puertos"; fi

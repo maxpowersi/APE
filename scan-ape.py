@@ -45,6 +45,7 @@ servicesFolder =  [os.path.join(scanPath, "http"),
                     os.path.join(scanPath, "smtp"), 
                     os.path.join(scanPath, "dns"), 
                     os.path.join(scanPath, "rdp"),
+                    os.path.join(scanPath, "ssl"),
                     os.path.join(scanPath, "nmap")]
 
 consoleWritte("--- Creating project folder ---")
