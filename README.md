@@ -52,10 +52,10 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 - getJS
 - retire
 - curl
+- wappalyzer
 - httprobe
 - phantomJS
 - aquatone
-- wappalyzer
 - webtech
 - waybackurls
 - linkfinder
@@ -73,6 +73,11 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 	- ssh-audit
 	- ssh-auth-methods
 	- sshv1
+### Telnet
+- ncrack
+- nmap scripts
+	- banner
+	-  telnet-ntlm-info
 ### FTP
 - ncrack
 - nmap scripts
@@ -80,11 +85,6 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 	- ftp-bounce
 	- ftp-syst
 	- banner
-### Telnet
-- ncrack
-- nmap scripts
-	- banner
-	-  telnet-ntlm-info
 ### DNS
 - dnswalk
 - nmap scripts

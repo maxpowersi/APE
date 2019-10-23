@@ -6,7 +6,7 @@ import os
 import datetime
 
 def consoleWritte(msg):
-    os.system("printf \"\e[92m--- {0} ---\e[0m\n\"".format(msg))
+    os.system("printf \"\e[92m--- {0} ---\e[0m\n\n\"".format(msg))
 
 def parseArgs():
     parser = argparse.ArgumentParser(description="", version="0.12b")
