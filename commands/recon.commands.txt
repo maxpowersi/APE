@@ -15,6 +15,11 @@ timeout 900 gitrob -silent -save "_target_.gitrob.json" "_port_"
 cd "_realport_/brute-force/"; bucketeer "_port_" > "_output_/_target_.bucketeer.txt"
 
 _blocker_
+
+_block:subdomain_
+printf " \n" 
 printf "\e[92m--- Concatenating all subdomains found ---\e[0m" 
+printf " \n" 
 cd _output_; for i in *.csv; do  cat $i | cut -d ',' -f4 > $i.subdomain.txt; break; done
 cd _output_; sort -u *.subdomain.txt > _output_/subdomains.txt
+_block:subdomain_

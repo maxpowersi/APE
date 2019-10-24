@@ -1,22 +1,26 @@
-printf "\e[92m--- Running nmap scan for _target_ ---\e[0m" 
-
+_block:nmap_
+printf " \n"
+printf "\e[92m--- Running nmap scan for _target_ ---\e[0m"
+printf " \n" 
 cd _output_; nmap.exe -sSV -O -vvv --top-ports 1000 _target_ -oA nmap/_target_ > /dev/null
+_block:nmap_
+
 _blocker_
 
-cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'ssh' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf "\e[92m--- Running ssh commands for _target_ ---\e[0m" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/ssh.commands.txt' -o '_output_/ssh' -p "$puertos"; fi
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'ssh' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf ""; printf "\e[92m--- Running ssh commands for _target_ ---\e[0m \n" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/ssh.commands.txt' -o '_output_/ssh' -p "$puertos"; fi
 
-cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'telnet' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf "\e[92m--- Running telnet commands for _target_ ---\e[0m" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/telnet.commands.txt' -o '_output_/telnet'  -p "$puertos"; fi
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'telnet' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf ""; printf "\e[92m--- Running telnet commands for _target_ ---\e[0m \n" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/telnet.commands.txt' -o '_output_/telnet'  -p "$puertos"; fi
 
-cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'ftp' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf "\e[92m--- Running ftp commands for _target_ ---\e[0m" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/ftp.commands.txt' -o '_output_/ftp' -p "$puertos"; fi
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'ftp' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf ""; printf "\e[92m--- Running ftp commands for _target_ ---\e[0m \n" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/ftp.commands.txt' -o '_output_/ftp' -p "$puertos"; fi
 
-cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'smtp' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}');if [ $puertos ]; then printf "\e[92m--- Running smtp commands for _target_ ---\e[0m" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/smtp.commands.txt' -o '_output_/smtp' -p "$puertos"; fi
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'smtp' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}');if [ $puertos ]; then printf ""; printf "\e[92m--- Running smtp commands for _target_ ---\e[0m \n" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/smtp.commands.txt' -o '_output_/smtp' -p "$puertos"; fi
 
-cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'dns' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf "\e[92m--- Running dns commands for _target_ ---\e[0m" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/dns.commands.txt' -o '_output_/dns' -p "$puertos"; fi
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'dns' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf ""; printf "\e[92m--- Running dns commands for _target_ ---\e[0m \n" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/dns.commands.txt' -o '_output_/dns' -p "$puertos"; fi
 
-cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'rdp' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf "\e[92m--- Running rdp commands for _target_ ---\e[0m" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/rdp.commands.txt' -o '_output_/rdp' -p "$puertos"; fi
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'rdp' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf ""; printf "\e[92m--- Running rdp commands for _target_ ---\e[0m \n" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/rdp.commands.txt' -o '_output_/rdp' -p "$puertos"; fi
 
-cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'smb' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf "\e[92m--- Running smb commands for _target_ ---\e[0m" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/smb.commands.txt' -o '_output_/smb' -p "$puertos"; fi
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'smb' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf ""; printf "\e[92m--- Running smb commands for _target_ ---\e[0m \n" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/smb.commands.txt' -o '_output_/smb' -p "$puertos"; fi
 
-cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'http' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf "\e[92m--- Running http commands for _target_ ---\e[0m"; interlace -rp "http" --silent -threads 5 -t "_target_" -cL '_realport_/commands/http.commands.txt' -o '_output_/http' -p "$puertos"; fi
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'http' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf ""; printf "\e[92m--- Running http commands for _target_ ---\e[0m \n"; interlace -rp "http" --silent -threads 5 -t "_target_" -cL '_realport_/commands/http.commands.txt' -o '_output_/http' -p "$puertos"; fi
 
-cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'ssl' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf "\e[92m--- Running ssl commands for _target_ ---\e[0m" ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/ssl.commands.txt' -o '_output_/ssl' -p "$puertos"; printf "\e[92m--- Running https commands for _target_ ---\e[0m" ; interlace -rp "https" --silent -threads 5 -t "_target_" -cL '_realport_/commands/http.commands.txt' -o '_output_/ssl' -p "$puertos"; fi
+cd _output_; puertos=$(nmap-parse-output nmap/_target_.xml service 'ssl' | cut -d ':' -f2 | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}'); if [ $puertos ]; then printf ""; printf "\e[92m--- Running ssl commands for _target_ ---\e[0m" \n ; interlace -threads 5 --silent -t _target_ -cL '_realport_/commands/ssl.commands.txt' -o '_output_/ssl' -p "$puertos"; printf "";  printf "\e[92m--- Running https commands for _target_ ---\e[0m \n" ; interlace -rp "https" --silent -threads 5 -t "_target_" -cL '_realport_/commands/http.commands.txt' -o '_output_/ssl' -p "$puertos"; fi
