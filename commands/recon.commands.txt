@@ -23,3 +23,5 @@ printf " \n"
 cd _output_; for i in *.csv; do  cat $i | cut -d ',' -f4 > $i.subdomain.txt; break; done
 cd _output_; sort -u *.subdomain.txt > _output_/subdomains.txt
 _block:subdomain_
+
+subjack -w _output_/subdomains.txt -t 50 -timeout 30 -o _target_.subjack.txt -ssl
