@@ -10,7 +10,7 @@ print("""
 +-+-+-+-+-+-+-+-+-
 """)
 
-parser = argparse.ArgumentParser(description="", version="0.15b")
+parser = argparse.ArgumentParser(description="", version="1.0")
 parser.add_argument('-m',action="store", dest="module", help="module name, it must be recon, scan or all", required=True)
 parser.add_argument('-t',action="store", dest="target", help="target, for recon it must be a domain, for scan it must be a text file with subdomains or IPs", required=True)
 parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)

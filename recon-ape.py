@@ -9,7 +9,7 @@ def consoleWritte(msg):
     os.system("printf \"\e[92m--- {0} ---\e[0m\n\n\"".format(msg))
 
 def parseArgs():
-    parser = argparse.ArgumentParser(description="", version="0.12b")
+    parser = argparse.ArgumentParser(description="", version="1.0")
     parser.add_argument('-t',action="store", dest="target", help="the target to perform recon", required=True)
     parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)
     parser.add_argument('-ip', action="store", dest="createIpFile", help="resolve subdomains and generate IPs file", required=True)
