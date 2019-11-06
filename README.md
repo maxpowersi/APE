@@ -45,16 +45,17 @@ This module will run all recon tools in the file "scan.commands.txt". By default
 >Note: Please observe  that (by default) each dictionary used by ncrack is called:
 "usernames.{service}.txt and passwords.{service}.txt". For example:
 "usernames.ftp.txt" is for ftp service.
-### HTTP/S
+### HTTPS
 - testssl
 - sslscan
+### HTTP & HTTPS
 - nikto
 - getJS
 - retire
 - curl
 - wappalyzer
 - httprobe
-- phantomJS
+- webscreenshot
 - aquatone
 - webtech
 - waybackurls
