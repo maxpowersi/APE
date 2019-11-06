@@ -1,3 +1,5 @@
+mkdir ape-tools
+cd ape-tools
 sudo apt-get install xsltproc
 sudo apt-get install nmap
 sudo apt-get install ncrack
@@ -13,7 +15,7 @@ go get github.com/OJ/gobuster
 go get -u github.com/tomnomnom/httprobe
 go get github.com/003random/getJS
 go get github.com/tomnomnom/waybackurls
-#TODO go to repo and install the tool, and add to the path
+#TODO install each tool and add them to the path
 git clone https://github.com/ernw/nmap-parse-output.git
 git clone https://github.com/aboul3la/Sublist3r.git
 git clone https://github.com/tomdev/teh_s3_bucketeers.git
@@ -26,7 +28,6 @@ git clone https://github.com/jobertabma/virtual-host-discovery.git
 git clone https://github.com/ZephrFish/GoogD0rker.git
 git clone https://github.com/1N3/Goohak.git
 git clone https://github.com/haccer/subjack.git
-#Extract the  zip, and add to the path the tools
 wget https://github.com/OWASP/Amass/releases/download/v3.2.0/amass_v3.2.0_linux_amd64.zip
 wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 
 wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
