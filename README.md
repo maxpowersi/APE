@@ -17,7 +17,6 @@ APE (in spanish "Asistente de Pentest Externo"), is an assistant tool for extern
 - All tools run in recon and scan module.
 ## Installation
 The setup.sh script will try to install all tools and dependencies. <br/>
-**TODO: improve this script**
 ```
 git clone https://github.com/maxpowersi/APE.git
 cd APE
