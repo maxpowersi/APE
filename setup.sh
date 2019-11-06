@@ -17,6 +17,8 @@ go get github.com/003random/getJS
 go get github.com/tomnomnom/waybackurls
 #TODO install each tool and add them to the path
 git clone https://github.com/ernw/nmap-parse-output.git
+git clone https://github.com/codingo/Interlace.git
+git clone https://github.com/ernw/nmap-parse-output.git
 git clone https://github.com/aboul3la/Sublist3r.git
 git clone https://github.com/tomdev/teh_s3_bucketeers.git
 git clone https://github.com/guelfoweb/knock.git
