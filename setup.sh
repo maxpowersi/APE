@@ -43,8 +43,7 @@ git clone https://github.com/1N3/Goohak.git
 git clone https://github.com/haccer/subjack.git
 =======
 git clone https://github.com/haccer/subjack.git
-wget https://github.com/OWASP/Amass/releases/download/v3.2.0/amass_v3.2.0_linux_amd64.zip
-wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 
+wget https://github.com/OWASP/Amass/releases/download/v3.2.0/amass_v3.2.0_linux_amd64.zip 
 wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
 wget https://testssl.sh/testssl.sh
 >>>>>>> 0347f54245567eab1b7a1b94849fa6d8ae49edba
