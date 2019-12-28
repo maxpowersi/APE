@@ -111,7 +111,6 @@ You can add you own tools, editing the command files.
 +-+-+-+-+-+-+-+-+-
 
 usage: ape.py [-h] [-v] -m MODULE -t TARGET -o OUTPUTDIR -q QUEUED
-              [-ip CREATEIPFILE]
 
 optional arguments:
   -h, --help        show this help message and exit
