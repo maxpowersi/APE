@@ -86,7 +86,7 @@ scanCommandsFile.close()
 scanCommandsFileAfter.close()
 
 consoleWritte("Starting host scan")
-os.system("cd '{0}'; interlace --silent -timeout 1200 -tL '{1}' -o '{0}' -cL '{2}/commands/networkscan.commands.txt' -threads {3}"
+os.system("cd '{0}'; interlace --silent -timeout 1200 -tL '{1}' -o '{0}' -cL '{2}/commands/host.commands.txt' -threads {3}"
     .format(scanPath, targets, apePath, queued))
 
 consoleWritte("Starting services scan")

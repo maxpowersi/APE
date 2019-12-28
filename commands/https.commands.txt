@@ -1,4 +1,4 @@
-nikto -host https://_target_:_port_ -ssl -maxtime 15m -output "_output_/https/_target_._port_.nikto.txt" > /dev/null
+nikto -host https://_target_:_port_ -ssl -maxtime 15m -output "_output_/https/_target_._port_.nikto.txt" > /dev/null 2>&1
 sslscan "_target_:_port_" > "_output_/https/_target_._port_.sslscan.txt"
 testssl "_target_:_port_" > "_output_/https/_target_._port_.testssl.txt"
 getJS -url "https://_target_" -resolve -complete -output "_output_/https/_target_._port_.getJS.txt" > /dev/null

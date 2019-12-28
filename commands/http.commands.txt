@@ -1,4 +1,4 @@
-nikto -host http://_target_:_port_ -maxtime 15m -output  "_output_/http/_target_._port_.nikto.txt" > /dev/null
+nikto -host http://_target_:_port_ -maxtime 15m -output  "_output_/http/_target_._port_.nikto.txt" > /dev/null 2>&1
 getJS -url "http://_target_" -resolve -complete -output "_output_/http/_target_._port_.getJS.txt" > /dev/null
 curl -i -s -o "_output_/http/_target_._port_.curl.txt" "http://_target_:_port_" > /dev/null
 wappalyzer "http://_target_:_port_" > "_output_/http/_target_._port_.wappalyzer.json"
