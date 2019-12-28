@@ -1,27 +1,8 @@
-theharvester -d _target_ -b google,bing,yahoo,censys,crtsh,netcraft > _target_.harvester.txt
-
-sublist3r -d _target_ -o _target_.sublist3r.subdomain.txt -e yahoo,baidu,google,bing,ask,netcraft,virustotal,threatcrowd,ssl,passivedns
-
-subfinder -d _target_ -o _target_.subfinder.subdomain.txt --exclude-sources dnsdumpster,waybackarchive
-
-(knockpy -c _target_ > _target_.knockpy.txt)> /dev/null 2>&1
-
-amass.exe enum -d _target_ -oA _target_.amass.subdomain > /dev/null 2>&1
-
-subfinder -d _target_ -o _target_.subfinder.brute.subdomain.txt -b --no-passive -w "_realport_/brute-force/common_subdomains.small.txt" -t 15
-
-timeout 900 gitrob -silent -save "_target_.gitrob.json" "_port_"
-
-cd "_realport_/brute-force/"; bucketeer "_port_" > "_output_/_target_.bucketeer.txt"
-
-_blocker_
-
-_block:subdomain_
-printf " \n" 
-printf "\e[92m--- Concatenating all subdomains found ---\e[0m" 
-printf " \n" 
-cd _output_; for i in *.csv; do  cat $i | cut -d ',' -f4 > $i.subdomain.txt; break; done
-cd _output_; sort -u *.subdomain.txt > _output_/subdomains.txt
-_block:subdomain_
-
-subjack -w _output_/subdomains.txt -t 50 -timeout 30 -o _target_.subjack.txt -ssl
+theharvester -d _target_ -b google,bing,yahoo,censys,crtsh,netcraft > "_target_.harvester.txt" &> /dev/null
+subfinder -d _target_ -o "_target_.subfinder.subdomain.txt" --exclude-sources dnsdumpster,waybackarchive &> /dev/null
+subfinder -d _target_ -o "_target_.subfinder.brute.subdomain.txt" -b --no-passive -w "_realport_/brute-force/common_subdomains.small.txt" -t 15 &> /dev/null
+(knockpy -c _target_) > /dev/null 2>&1
+timeout 900 gitrob -silent -save "_target_.gitrob.json" "_port_" &> /dev/null
+cd "_realport_/brute-force/"; bucketeer "_port_" > "_output_/_target_.bucketeer.txt" &> /dev/null
+(amass.exe enum -d "_target_" -active -oA "_target_.amass.subdomain") > /dev/null 2>&1
+(sublist3r -d _target_ -o "_target_.sublist3r.subdomain.txt" -e yahoo,baidu,google,bing,ask,netcraft,virustotal,threatcrowd,ssl,passivedns) > /dev/null 2>&1

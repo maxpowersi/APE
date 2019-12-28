@@ -6,25 +6,23 @@ import os
 
 print("""
 +-+-+-+-+-+-+-+-+-
-|A|P|E| |v|0|.|15b|
+|A|P|E| |v|1|.|0|
 +-+-+-+-+-+-+-+-+-
 """)
 
-parser = argparse.ArgumentParser(description="", version="1.0")
+parser = argparse.ArgumentParser(description="")
 parser.add_argument('-m',action="store", dest="module", help="module name, it must be recon, scan or all", required=True)
 parser.add_argument('-t',action="store", dest="target", help="target, for recon it must be a domain, for scan it must be a text file with subdomains or IPs", required=True)
 parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)
 parser.add_argument('-q', action="store", dest="queued", help="number of queued or threads, each queued will process one resource (IP or subdomain)", required=True)
-parser.add_argument('-ip', action="store", dest="createIpFile", help="resolve subdomains and generate IPs file", required=False)
 parameters = parser.parse_args()
 
-if not parameters.module.lower() in ["scan", "recon", "all"]:
-    print("The argument -m (module) is invalid, it must be recon, scan or all")
+if not parameters.module.lower() in ["scan", "recon"]:
+    print("The argument -m (module) is invalid, it must be recon or scan")
     sys.exit()
 
 module = parameters.module
 isScan = module == "scan"
-isAll = module == "all"
 
 if parameters.module.lower() == "scan":
     if not os.path.isfile(parameters.target):
@@ -43,20 +41,12 @@ if not validators.between(int(parameters.queued), min=1, max=50):
     print("The argument -q (queued) is invalid, min 1, max 500")
     sys.exit()
 
-if not isScan:
-    if parameters.createIpFile == None or not parameters.createIpFile.lower() in ["true", "false"]:
-        print ("The argument -ip (createIpFile) is invalid, it must be true or false. This is mandatory for module recon and all")
-        sys.exit()
-
 apePath = os.path.dirname(os.path.realpath(__file__))
 target = parameters.target
 queued = parameters.queued
 projectPath = parameters.outputDir
-createIpFiles = parameters.createIpFile
 
 if isScan:
-    os.system("python '{3}/scan-ape.py' -t '{0}' -o '{1}' -q {2} ".format(target, projectPath, queued, apePath))
+    os.system("python3 '{3}/scan-ape.py' -t '{0}' -o '{1}' -q {2} ".format(target, projectPath, queued, apePath))
 else:
-    os.system("python '{4}/recon-ape.py' -t '{0}' -o '{1}' -ip {2} -q {3}".format(target, projectPath, createIpFiles, queued, apePath))
-    if isAll:
-        os.system("python '{3}/scan-ape.py' -t '{0}' -o '{1}' -q {2} ".format(os.path.join(os.path.join(projectPath, target), "recon/subdomains.txt"), os.path.join(projectPath, target), queued, apePath))
+    os.system("python3 '{3}/recon-ape.py' -t '{0}' -o '{1}' -q {2}".format(target, projectPath, queued, apePath))

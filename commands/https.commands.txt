@@ -1,0 +1,9 @@
+nikto -host https://_target_:_port_ -ssl -maxtime 15m -output "_output_/https/_target_._port_.nikto.txt" > /dev/null
+sslscan "_target_:_port_" > "_output_/https/_target_._port_.sslscan.txt"
+testssl "_target_:_port_" > "_output_/https/_target_._port_.testssl.txt"
+getJS -url "https://_target_" -resolve -complete -output "_output_/https/_target_._port_.getJS.txt" > /dev/null
+curl -i -s -o "_output_/https/_target_._port_.curl.txt" "https://_target_:_port_" > /dev/null
+wappalyzer "https://_target_:_port_" > "_output_/https/_target_._port_.wappalyzer.json"
+echo _target_ | httprobe -s -p "https:_port_" > "_output_/https/_target_._port_.httpProbe.txt"
+webscreenshot.py --no-xserver -r phantomjs -o "_output_/https" "https://_target_:_port_" > /dev/null
+###cat "_output_/https/_target_._port_.getJS.txt" | while read jsFile; do cd _output_/https/JS; wget -q "$jsFile"; done; retire --jspath "_output_/https/JS/" --outputformat "text" --outputpath "_output_/https/_target_._port_.retire.txt"

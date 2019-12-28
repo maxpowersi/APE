@@ -1,2 +1,0 @@
-sslscan _target_:_port_ >_output_/_target_._port_.sslscan.txt
-testssl _target_:_port_ > _output_/_target_._port_.testssl.txt

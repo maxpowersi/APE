@@ -1,0 +1,3 @@
+mkfifo _output_/host/_target_.fifo.txt; echo "_target_\n" > _output_/host/_target_.fifo.txt
+subjack -w _output_/host/_target_.fifo.txt -t 10 -timeout 30 -a -ssl -o "_output/host/_target_.subjack.txt"
+nmap.exe -sSV -O -vvv --top-ports 1000 _target_ -oA "_output_/host/_target_" > /dev/null & tail --pid=$! -f /dev/null
