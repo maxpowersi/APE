@@ -1,1 +1,0 @@
-host _target_ > "_output_/_target_.dnsresolver.txt"

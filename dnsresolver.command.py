@@ -1,0 +1,1 @@
+dig +short _target_ | echo "_target_:$(cat -)" | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}' > _output_/_target_.dig.txt

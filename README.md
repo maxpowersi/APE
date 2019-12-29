@@ -54,11 +54,9 @@ This module will run all host or network scan tools in the file "host.commands.t
 - waybackurls
 - linkfinder
 - photon
+- Goohak
 - gobuster
 - opendoor
-- virtual-host-discovery
-- GoogD0rker
-- Goohak
 ### SSH
 - ncrack
 - ssh-user-enumeration

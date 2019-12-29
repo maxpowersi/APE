@@ -4,4 +4,8 @@ curl -i -s -o "_output_/http/_target_._port_.curl.txt" "http://_target_:_port_" 
 wappalyzer "http://_target_:_port_" > "_output_/http/_target_._port_.wappalyzer.json"
 echo _target_ | httprobe -s -p "http:_port_" > "_output_/http/_target_._port_.httpProbe.txt"
 webscreenshot.py --no-xserver -r phantomjs -o "_output_/http" "http://_target_:_port_" > /dev/null
+echo "http://_target_" | aquatone.exe -silent -out "_output_/http/_target_._port_.aquatone" > /dev/null 2>&1
+webtech -u "http://_target_" > "_output_/http/_target_._port_.webtech.txt"
+waybackurls "http://_target_" > "_output_/http/_target_._port_.waybackurls.txt"
+###linkfinder -i "_output_/http/JS/*.js" -o "_output_/http/_target_._port_.linkFinder.html"
 ###cat "_output_/http/_target_._port_.getJS.txt" | while read jsFile; do cd _output_/https/JS; wget -q "$jsFile"; done; retire --jspath "_output_/http/JS/" --outputformat "text" --outputpath "_output_/http/_target_._port_.retire.txt"

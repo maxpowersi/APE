@@ -84,7 +84,7 @@ for tup in commandsFiles:
     f.close()
 scanCommandsFile.close() 
 scanCommandsFileAfter.close()
-
+print(os.path.join(os.path.join(apePath, "commands"), "scan.commands.txt"))
 consoleWritte("Starting host scan")
 os.system("cd '{0}'; interlace --silent -timeout 1200 -tL '{1}' -o '{0}' -cL '{2}/commands/host.commands.txt' -threads {3}"
     .format(scanPath, targets, apePath, queued))
@@ -94,5 +94,8 @@ os.system("cd '{0}'; interlace --silent -timeout 1200 -tL '{1}' -o '{0}' -cL '{2
     .format(scanPath, targets, apePath, queued))
 os.system("interlace --silent -timeout 1200 -tL '{1}' -o '{0}' -cL '{2}/commands/scanAfter.commands.txt' -threads {3}"
     .format(scanPath, targets, apePath, queued))
+
+os.remove(os.path.join(os.path.join(apePath, "commands"), "scan.commands.txt"))
+os.remove(os.path.join(os.path.join(apePath, "commands"), "scanAfter.commands.txt"))
 
 consoleWritte("The scan was finished successfully")

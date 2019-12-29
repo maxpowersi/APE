@@ -1,2 +1,2 @@
-echo "_target_\n" > "_output_/host/_target_.tempFile.txt"; subjack -w "_output_/host/_target_.tempFile.txt" -t 10 -timeout 30 -a -ssl -o "_output_/host/_target_.subjack.txt"; rm "_output_/host/_target_.tempFile.txt"
-nmap.exe -sSV -O -vvv --top-ports 1000 _target_ -oA "_output_/host/_target_" > /dev/null & tail --pid=$! -f /dev/null
+echo "_target_" > "_output_/host/_target_.tempFile.txt"; subjack -w "_output_/host/_target_.tempFile.txt" -t 10 -timeout 30 -a -ssl -v -o "_output_/host/_target_.subjack.txt" > /dev/null 2>&1; rm "_output_/host/_target_.tempFile.txt"
+nmap.exe -sSV -O -vvv --top-ports 1000 _target_ -oA "_output_/host/_target_" > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1
