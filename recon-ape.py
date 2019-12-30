@@ -50,7 +50,7 @@ if not os.path.exists(projectPath): os.system("mkdir " + projectPath)
 if not os.path.exists(reconPath): os.system("mkdir " + reconPath)
 
 consoleWritte("Starting the recon scan")
-os.system("cd '{0}'; interlace --silent -t '{1}' -o '{0}' -cL '{2}/commands/recon.commands.txt' -rp '{2}' -p {3} -threads {4}"
+os.system("cd '{0}'; interlace -t '{1}' -o '{0}' -cL '{2}/commands/recon.commands.txt' -rp '{2}' -p {3} -threads {4}"
     .format(reconPath, target, apePath, target.split(".")[0], threads))
 
 consoleWritte("Concatenating all subdomains found")

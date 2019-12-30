@@ -54,8 +54,6 @@ commandsFiles =  [("ftp", "ftp.commands.txt"),
                   ("dns", "dns.commands.txt"),
                   ("rdp", "rdp.commands.txt"),
                   ("telnet", "telnet.commands.txt"),
-                  ("ssl", "ssl.commands.txt"),
-                  ("https", "ssl.commands.txt"),
                   ("ssl", "https.commands.txt"),
                   ("https", "https.commands.txt"),
                   ("http", "http.commands.txt")]
@@ -66,8 +64,10 @@ for servicePath in servicesFolder:
     if not os.path.exists(servicePath): os.system("mkdir " + servicePath)
 
 consoleWritte("Building commands list")
-scanCommandsFile = open(os.path.join(os.path.join(apePath, "commands"), "scan.commands.txt"), "w") 
-scanCommandsFileAfter = open(os.path.join(os.path.join(apePath, "commands"), "scanAfter.commands.txt"), "w") 
+scanCommandsFilePath = os.path.join(os.path.join(apePath, "commands"), "scan.commands.txt")
+scanCommandsFile = open(scanCommandsFilePath, "w") 
+scanCommandsFileAfterPath = os.path.join(os.path.join(apePath, "commands"), "scanAfter.commands.txt")
+scanCommandsFileAfter = open(scanCommandsFileAfterPath, "w") 
 for tup in commandsFiles:
     service =  tup[0]
     commandFileName = tup[1]
@@ -84,18 +84,18 @@ for tup in commandsFiles:
     f.close()
 scanCommandsFile.close() 
 scanCommandsFileAfter.close()
-print(os.path.join(os.path.join(apePath, "commands"), "scan.commands.txt"))
+
 consoleWritte("Starting host scan")
-os.system("cd '{0}'; interlace --silent -timeout 1200 -tL '{1}' -o '{0}' -cL '{2}/commands/host.commands.txt' -threads {3}"
+os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -o '{0}' -cL '{2}/commands/host.commands.txt' -threads {3}"
     .format(scanPath, targets, apePath, queued))
 
 consoleWritte("Starting services scan")
-os.system("cd '{0}'; interlace --silent -timeout 1200 -tL '{1}' -o '{0}' -cL '{2}/commands/scan.commands.txt' -threads {3}"
+os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -o '{0}' -cL '{2}/commands/scan.commands.txt' -rp '{2}' -threads {3}"
     .format(scanPath, targets, apePath, queued))
-os.system("interlace --silent -timeout 1200 -tL '{1}' -o '{0}' -cL '{2}/commands/scanAfter.commands.txt' -threads {3}"
+os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -o '{0}' -cL '{2}/commands/scanAfter.commands.txt' -rp '{2}' -threads {3}"
     .format(scanPath, targets, apePath, queued))
 
-os.remove(os.path.join(os.path.join(apePath, "commands"), "scan.commands.txt"))
-os.remove(os.path.join(os.path.join(apePath, "commands"), "scanAfter.commands.txt"))
+os.remove(scanCommandsFilePath)
+os.remove(scanCommandsFileAfterPath)
 
 consoleWritte("The scan was finished successfully")
