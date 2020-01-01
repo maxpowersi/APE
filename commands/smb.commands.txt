@@ -1,0 +1,1 @@
+nmap.exe -Pn -p _port_ --script=banner,smb-protocols,smb-enum-shares,smb-vuln-ms17-010 -oA "_output_/smb/_target_._port_.nmap.script" _target_  > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1

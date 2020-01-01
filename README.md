@@ -73,12 +73,11 @@ This module will run all host or network scan tools in the file "host.commands.t
 ### FTP
 - ncrack
 - nmap scripts
+	- banner
 	- ftp-anon
 	- ftp-bounce
 	- ftp-syst
-	- banner
 ### DNS
-- dnswalk
 - nmap scripts
 	- banner
 	- dns-cache-snoop
@@ -92,11 +91,12 @@ This module will run all host or network scan tools in the file "host.commands.t
 ### RDP
 - ncrack
 - nmap scripts
+	- banner
 	- rdp-ntlm-info
 	- rdp-vuln-ms12-020
 ### SMB
 - nmap scripts
-	- rdp-ntlm-info
+	- banner
 	- smb-protocols
 	- smb-enum-shares
 	- smb-vuln-ms17-010

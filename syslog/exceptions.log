@@ -1,4 +1,0 @@
-2019-12-30 14:49:49 [ERROR] : str: data/directories.dat is not a file  in /usr/local/lib/python3.7/dist-packages/opendoor-3.4.481-py3.7.egg/src/lib/package/exceptions.py -> __init__() line 26
-2019-12-30 14:49:52 [ERROR] : str: data/directories.dat is not a file  in /usr/local/lib/python3.7/dist-packages/opendoor-3.4.481-py3.7.egg/src/lib/package/exceptions.py -> __init__() line 26
-2019-12-30 14:51:32 [ERROR] : str: data/directories.dat is not a file  in /usr/local/lib/python3.7/dist-packages/opendoor-3.4.481-py3.7.egg/src/lib/package/exceptions.py -> __init__() line 26
-2019-12-30 14:52:10 [ERROR] : str: data/directories.dat is not a file  in /usr/local/lib/python3.7/dist-packages/opendoor-3.4.481-py3.7.egg/src/lib/package/exceptions.py -> __init__() line 26
