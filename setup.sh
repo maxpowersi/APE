@@ -3,7 +3,6 @@ cd ape-tools
 sudo apt-get install xsltproc
 sudo apt-get install nmap
 sudo apt-get install ncrack
-sudo apt-get install dnswalk
 sudo apt-get install smtp-user-enum
 sudo apt-get install sslscan
 sudo apt-get install nikto
