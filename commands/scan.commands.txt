@@ -1,36 +1,36 @@
-nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do nikto -host https://_target_:$p -ssl -maxtime 15m -output "_output_/https/_target_.$p.nikto.txt"; done
-nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do getJS -url "https://_target_:$p" -resolve -complete -output "_output_/https/_target_.$p.getJS.txt"; done
+nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do nikto -host https://_target_:$p -ssl -maxtime 15m -output "_output_/https/_target_.$p.nikto.txt" > /dev/null; done
+nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do getJS -url "https://_target_:$p" -resolve -complete -output "_output_/https/_target_.$p.getJS.txt" > /dev/null; done
 nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do curl -i -s -o "_output_/https/_target_.$p.curl.txt" "https://_target_:$p"; done
 nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do wappalyzer "https://_target_:$p" > "_output_/https/_target_.$p.wappalyzer.json"; done
 nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do echo _target_ | httprobe -s -p "https:$p" > "_output_/https/_target_.$p.httpProbe.txt"; done
-nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do webscreenshot.py --no-xserver -r phantomjs -o "_output_/https" "https://_target_:$p"; done
-nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do echo "https://_target_:$p" | aquatone.exe -silent -out "_output_/https/_target_.$p.aquatone"; done
+nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do webscreenshot.py --no-xserver -r phantomjs -o "_output_/https" "https://_target_:$p" > /dev/null; done
+nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do echo "https://_target_:$p" | aquatone.exe -silent -out "_output_/https/_target_.$p.aquatone" > /dev/null 2>&1; done
 nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do webtech -u "https://_target_:$p" > "_output_/https/_target_.$p.webtech.txt"; done
 nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do waybackurls "https://_target_:$p" > "_output_/https/_target_.$p.waybackurls.txt"; done
 nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do photon -u "https://_target_:$p" -o "_output_/https/_target_.$p.photon" > /dev/null 2>&1; done
 nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do goohak "https://_target_:$p" > "_output_/https/_target_.$p.goohak.txt"; done
 nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do sslscan "_target_:$p" > "_output_/https/_target_.$p.sslscan.txt"; done
-nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do testssl --openssl-timeout 1200 "_target_:$p" > "_output_/https/_target_.$p.testssl.txt"; done
-nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do nikto -host https://_target_:$p -ssl -maxtime 15m -output "_output_/https/_target_.$p.nikto.txt"; done
-nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do getJS -url "https://_target_:$p" -resolve -complete -output "_output_/https/_target_.$p.getJS.txt"; done
+nmap-parse-output host/_target_.xml service 'ssl' | cut -d ':' -f2 | while read p; do timeout 1200 testssl --openssl-timeout 1200 "_target_:$p" > "_output_/https/_target_.$p.testssl.txt"; done
+nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do nikto -host https://_target_:$p -ssl -maxtime 15m -output "_output_/https/_target_.$p.nikto.txt" > /dev/null; done
+nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do getJS -url "https://_target_:$p" -resolve -complete -output "_output_/https/_target_.$p.getJS.txt" > /dev/null; done
 nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do curl -i -s -o "_output_/https/_target_.$p.curl.txt" "https://_target_:$p"; done
 nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do wappalyzer "https://_target_:$p" > "_output_/https/_target_.$p.wappalyzer.json"; done
 nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do echo _target_ | httprobe -s -p "https:$p" > "_output_/https/_target_.$p.httpProbe.txt"; done
-nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do webscreenshot.py --no-xserver -r phantomjs -o "_output_/https" "https://_target_:$p"; done
-nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do echo "https://_target_:$p" | aquatone.exe -silent -out "_output_/https/_target_.$p.aquatone"; done
+nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do webscreenshot.py --no-xserver -r phantomjs -o "_output_/https" "https://_target_:$p" > /dev/null; done
+nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do echo "https://_target_:$p" | aquatone.exe -silent -out "_output_/https/_target_.$p.aquatone" > /dev/null 2>&1; done
 nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do webtech -u "https://_target_:$p" > "_output_/https/_target_.$p.webtech.txt"; done
 nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do waybackurls "https://_target_:$p" > "_output_/https/_target_.$p.waybackurls.txt"; done
 nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do photon -u "https://_target_:$p" -o "_output_/https/_target_.$p.photon" > /dev/null 2>&1; done
 nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do goohak "https://_target_:$p" > "_output_/https/_target_.$p.goohak.txt"; done
 nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do sslscan "_target_:$p" > "_output_/https/_target_.$p.sslscan.txt"; done
-nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do testssl --openssl-timeout 1200 "_target_:$p" > "_output_/https/_target_.$p.testssl.txt"; done
-nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do nikto -host http://_target_:$p -maxtime 15m -output  "_output_/http/_target_.$p.nikto.txt"; done
-nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do getJS -url "http://_target_:$p" -resolve -complete -output "_output_/http/_target_.$p.getJS.txt"; done
+nmap-parse-output host/_target_.xml service 'https' | cut -d ':' -f2 | while read p; do timeout 1200 testssl --openssl-timeout 1200 "_target_:$p" > "_output_/https/_target_.$p.testssl.txt"; done
+nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do nikto -host http://_target_:$p -maxtime 15m -output  "_output_/http/_target_.$p.nikto.txt" > /dev/null; done
+nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do getJS -url "http://_target_:$p" -resolve -complete -output "_output_/http/_target_.$p.getJS.txt" > /dev/null; done
 nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do curl -i -s -o "_output_/http/_target_.$p.curl.txt" "http://_target_:$p"; done
 nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do wappalyzer "http://_target_:$p" > "_output_/http/_target_.$p.wappalyzer.json"; done
 nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do echo _target_ | httprobe -s -p "http:$p" > "_output_/http/_target_.$p.httpProbe.txt"; done
-nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do webscreenshot.py --no-xserver -r phantomjs -o "_output_/http" "http://_target_:$p"; done
-nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do echo "http://_target_:$p" | aquatone.exe -silent -out "_output_/http/_target_.$p.aquatone"; done
+nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do webscreenshot.py --no-xserver -r phantomjs -o "_output_/http" "http://_target_:$p" > /dev/null; done
+nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do echo "http://_target_:$p" | aquatone.exe -silent -out "_output_/http/_target_.$p.aquatone" > /dev/null 2>&1; done
 nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do webtech -u "http://_target_:$p" > "_output_/http/_target_.$p.webtech.txt"; done
 nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do waybackurls "http://_target_:$p" > "_output_/http/_target_.$p.waybackurls.txt"; done
 nmap-parse-output host/_target_.xml service 'http' | cut -d ':' -f2 | while read p; do photon -u "http://_target_:$p" -o "_output_/http/_target_.$p.photon" > /dev/null 2>&1; done

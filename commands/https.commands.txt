@@ -1,17 +1,16 @@
-nikto -host https://_target_:_port_ -ssl -maxtime 15m -output "_output_/https/_target_._port_.nikto.txt"
-getJS -url "https://_target_:_port_" -resolve -complete -output "_output_/https/_target_._port_.getJS.txt"
+nikto -host https://_target_:_port_ -ssl -maxtime 15m -output "_output_/https/_target_._port_.nikto.txt" > /dev/null
+getJS -url "https://_target_:_port_" -resolve -complete -output "_output_/https/_target_._port_.getJS.txt" > /dev/null
 curl -i -s -o "_output_/https/_target_._port_.curl.txt" "https://_target_:_port_"
 wappalyzer "https://_target_:_port_" > "_output_/https/_target_._port_.wappalyzer.json"
 echo _target_ | httprobe -s -p "https:_port_" > "_output_/https/_target_._port_.httpProbe.txt"
-webscreenshot.py --no-xserver -r phantomjs -o "_output_/https" "https://_target_:_port_"
-echo "https://_target_:_port_" | aquatone.exe -silent -out "_output_/https/_target_._port_.aquatone"
+webscreenshot.py --no-xserver -r phantomjs -o "_output_/https" "https://_target_:_port_" > /dev/null
+echo "https://_target_:_port_" | aquatone.exe -silent -out "_output_/https/_target_._port_.aquatone" > /dev/null 2>&1
 webtech -u "https://_target_:_port_" > "_output_/https/_target_._port_.webtech.txt"
 waybackurls "https://_target_:_port_" > "_output_/https/_target_._port_.waybackurls.txt"
 photon -u "https://_target_:_port_" -o "_output_/https/_target_._port_.photon" > /dev/null 2>&1
 goohak "https://_target_:_port_" > "_output_/https/_target_._port_.goohak.txt"
-###gobuster dir -o "_output_/https/_target_._port_.gobuster.txt" -w "_realport_/brute-force/common_discovery.small.txt" -u "https://_target_:_port_" --wildcard --noprogress  
+sslscan "_target_:_port_" > "_output_/https/_target_._port_.sslscan.txt" 
+timeout 1200 testssl --openssl-timeout 1200 "_target_:_port_" > "_output_/https/_target_._port_.testssl.txt"
+###timeout 2400 gobuster dir -o "_output_/https/_target_._port_.gobuster.txt" -w "_realport_/brute-force/common_discovery.small.txt" -u "https://_target_:_port_" --wildcard --noprogress  
 ###cat "_output_/https/_target_._port_.getJS.txt" | while read jsFile; do cd _output_/https/JS; wget -q "$jsFile"; done; retire --jspath "_output_/https/JS/" --outputformat "text" --outputpath "_output_/https/_target_._port_.retire.txt"
 ###linkfinder -i "_output_/https/JS/*.js" -o "_output_/https/_target_._port_.linkFinder.html" > /dev/null 2>&1
-###opendoor --host "https://_target_" --port _port_ --reports txt --reports-dir "_output_/https/_target_._port_.opendoor.txt"
-sslscan "_target_:_port_" > "_output_/https/_target_._port_.sslscan.txt" 
-testssl --openssl-timeout 1200 "_target_:_port_" > "_output_/https/_target_._port_.testssl.txt"
