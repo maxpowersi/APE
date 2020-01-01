@@ -1,2 +1,2 @@
-nmap.exe -Pn -p _port_ --script=banner,smtp-open-relay,smtp-commands -oA "_output_/ftp/_target_._port_.nmap.script" _target_  > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1 
-smtp-user-enum -U "_realport_/brute-force/common_usernames.small.txt" -m VRFY -t _target_ -p _port_ > "_output_/ssh/_target_._port_.sshaudit.txt"
+nmap.exe -Pn -p _port_ --script=banner,smtp-open-relay,smtp-commands -oA "_output_/smtp/_target_._port_.nmap.script" _target_  > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1 
+smtp-user-enum -U "_realport_/brute-force/common_usernames.small.txt" -m VRFY -t _target_ -p _port_ > "_output_/smtp/_target_._port_.smtp-user-enum.txt"
