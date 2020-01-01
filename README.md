@@ -60,16 +60,16 @@ This module will run all host or network scan tools in the file "host.commands.t
 ### SSH
 - ncrack
 - ssh-user-enumeration
+- ssh-audit
 - nmap scripts
 	- banner
-	- ssh-audit
 	- ssh-auth-methods
 	- sshv1
 ### Telnet
 - ncrack
 - nmap scripts
 	- banner
-	-  telnet-ntlm-info
+	- telnet-ntlm-info
 ### FTP
 - ncrack
 - nmap scripts
