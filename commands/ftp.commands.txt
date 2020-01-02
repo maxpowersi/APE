@@ -1,2 +1,2 @@
-nmap.exe -Pn -p _port_ --script=banner,ftp-anon,ftp-bounce,ftp-syst -oA "_output_/ftp/_target_._port_.nmap.script" _target_  > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1
+nmap.exe -Pn -p _port_ --script=banner,ftp-anon,ftp-bounce,ftp-syst -oA "_output_/ftp/_target_._port_.script" _target_  > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1
 ncrack  -v -U "_realport_/brute-force/usernames.ftp.txt" -P "_realport_/brute-force/passwords.ftp.txt" -p ftp:_port_ -oA "_output_/ftp/_target_._port_.ncrack" _target_
