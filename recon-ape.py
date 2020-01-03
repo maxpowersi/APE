@@ -9,58 +9,80 @@ import re
 def consoleWritte(msg):
     os.system("printf \"\e[92m--- {0} ---\e[0m\n\n\"".format(msg))
 
-def parseArgs():
-    parser = argparse.ArgumentParser(description="")
-    parser.add_argument('-t',action="store", dest="target", help="the target to perform recon", required=True)
-    parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)
-    parser.add_argument('-q', action="store", dest="threads", help="number of threads to use", required=True)
-    parameters = parser.parse_args()
+parser = argparse.ArgumentParser(description="")
+parser.add_argument('-t',action="store", dest="target", help="the target to perform recon", required=True)
+parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)
+parser.add_argument('-q', action="store", dest="threads", help="number of threads to use", required=True)
 
-    if not validators.domain(parameters.target):
-        print("The argument -t (target) is invalid, it must be a domain")
-        sys.exit()
+parameters = parser.parse_args()
 
-    if not os.path.exists(parameters.outputDir):
-        print ("The argument -o (output dir) is invalid, it must be a valid path")
-        sys.exit()
+if not validators.domain(parameters.target):
+    print("The argument -t (target) is invalid, it must be a domain")
+    sys.exit()
 
-    if not validators.between(int(parameters.threads), min=1, max=50):
-        print("The argument -q (queued) is invalid, min 1, max 500")
-        sys.exit()
-    
-    return parameters
+if not os.path.exists(parameters.outputDir):
+    print ("The argument -o (output dir) is invalid, it must be a valid path")
+    sys.exit()
 
-parameters = parseArgs()
+if not validators.between(int(parameters.threads), min=1, max=50):
+    print("The argument -q (queued) is invalid, min 1, max 500")
+    sys.exit()
+
 target = parameters.target
 threads = parameters.threads
+
+organization = target.split(".")[0]
 
 apePath = os.path.dirname(os.path.realpath(__file__))
 projectPath = os.path.join(parameters.outputDir, target)
 reconPath = os.path.join(projectPath, "recon")
-dnsresolverPath = os.path.join(projectPath, "recon/dnsresolver")
-subdomainsFile = "{0}/subdomains.txt".format(reconPath)
+dnsresolverPath = os.path.join(reconPath, "dnsresolver")
+commandsFolderPath = os.path.join(apePath, "commands")
+
+dnsresolverCommandFilePath = os.path.join(commandsFolderPath, "dnsresolver.commands")
+reconRunFilePath = os.path.join(commandsFolderPath, "recon.commands.run")
+subdomainsFilePath = os.path.join(reconPath, "subdomains.txt")
+commandsFiles =  [("recon", "recon.commands")]
 
 regexIP = '''^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.( 
             25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.( 
             25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.( 
             25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)'''
-      
+
 consoleWritte("Creating project folders")
-if not os.path.exists(projectPath): os.system("mkdir " + projectPath)
-if not os.path.exists(reconPath): os.system("mkdir " + reconPath)
+if not os.path.exists(projectPath):
+    os.system("mkdir " + projectPath)
+if not os.path.exists(reconPath):
+    os.system("mkdir " + reconPath)
+
+consoleWritte("Building command file")
+reconRun = open(reconRunFilePath, "w") 
+for tup in commandsFiles:
+    service =  tup[0]
+    commandFileName = tup[1]
+    commandFile = os.path.join(commandsFolderPath, commandFileName)
+    f = open(commandFile)
+    for line in f:
+        newLine = line.rstrip()
+        newLine = newLine.replace("_TARGET_", "_target_")
+        newLine = newLine.replace("_OUTPUT_", reconPath)
+        newLine = newLine.replace("_COMPANY_", organization)
+        newLine = newLine.replace("_APP_PATH_", apePath)
+        reconRun.write(newLine + "\n") 
+    f.close()
+reconRun.close() 
 
 consoleWritte("Starting the recon scan")
-os.system("cd '{0}'; interlace -t '{1}' -o '{0}' -cL '{2}/commands/recon.commands.txt' -rp '{2}' -p {3} -threads {4}"
-    .format(reconPath, target, apePath, target.split(".")[0], threads))
+os.system("cd '{0}'; interlace -t '{1}' -cL '{2}' -threads {3}"
+    .format(reconPath, target, reconRunFilePath, threads))
 
 consoleWritte("Concatenating all subdomains found")
-os.system("cd {0}; for i in *.csv; do  cat $i | cut -d ',' -f4 > $i.subdomain.txt; break; done ;cd {0}; sort -u *.subdomain.txt > {0}/subdomains.txt"
-    .format(reconPath))
+os.system("cd {0}; for i in *.csv; do  cat $i | cut -d ',' -f4 > $i.subdomain.txt; break; done ;cd {0}; sort -u *.subdomain.txt > {1}".format(reconPath, subdomainsFilePath))
 
 consoleWritte("Starting dns resolver for each subdomains")
-if not os.path.exists(dnsresolverPath): os.system("mkdir " + dnsresolverPath)
-dnsresolverCommandFilePath = os.path.join(dnsresolverPath, "dnsresolver.command.py")
-os.system("interlace --silent -tL '{0}' -o '{1}' -cL '{3}/dnsresolver.command.py' -threads {2}".format(subdomainsFile, dnsresolverPath, threads, apePath))
+if not os.path.exists(dnsresolverPath):
+    os.system("mkdir " + dnsresolverPath)
+os.system("interlace --silent -tL '{0}' -o '{1}' -cL '{3}' -threads {2}".format(subdomainsFilePath, dnsresolverPath, threads, dnsresolverCommandFilePath))
 
 consoleWritte("Concatenating all IPs found")
 os.system("cd {0}; cat *.dig.txt > {1}/ips.txt".format(dnsresolverPath, reconPath))
@@ -71,6 +93,8 @@ for l in ipsUniqueTemp:
     if re.search(regexIP, l): ipsUnique.write(l)
 ipsUnique.close()
 ipsUniqueTemp.close()
+
 os.system("rm -r {0}".format(dnsresolverPath))
+os.remove(reconRunFilePath)
 
 consoleWritte("The scan was finished successfully")

