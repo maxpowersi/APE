@@ -30,7 +30,6 @@ if not validators.between(int(parameters.threads), min=1, max=50):
 
 target = parameters.target
 threads = parameters.threads
-
 organization = target.split(".")[0]
 
 apePath = os.path.dirname(os.path.realpath(__file__))
@@ -39,8 +38,9 @@ reconPath = os.path.join(projectPath, "recon")
 dnsresolverPath = os.path.join(reconPath, "dnsresolver")
 commandsFolderPath = os.path.join(apePath, "commands")
 
-dnsresolverCommandFilePath = os.path.join(commandsFolderPath, "dnsresolver.commands")
 reconRunFilePath = os.path.join(commandsFolderPath, "recon.commands.run")
+
+dnsresolverCommandFilePath = os.path.join(commandsFolderPath, "dnsresolver.commands")
 subdomainsFilePath = os.path.join(reconPath, "subdomains.txt")
 commandsFiles =  [("recon", "recon.commands")]
 
@@ -82,7 +82,7 @@ os.system("cd {0}; for i in *.csv; do  cat $i | cut -d ',' -f4 > $i.subdomain.tx
 consoleWritte("Starting dns resolver for each subdomains")
 if not os.path.exists(dnsresolverPath):
     os.system("mkdir " + dnsresolverPath)
-os.system("interlace --silent -tL '{0}' -o '{1}' -cL '{3}' -threads {2}".format(subdomainsFilePath, dnsresolverPath, threads, dnsresolverCommandFilePath))
+os.system("cd {1}; interlace --silent -tL '{0}' -cL '{3}' -threads {2}".format(subdomainsFilePath, dnsresolverPath, threads, dnsresolverCommandFilePath))
 
 consoleWritte("Concatenating all IPs found")
 os.system("cd {0}; cat *.dig.txt > {1}/ips.txt".format(dnsresolverPath, reconPath))

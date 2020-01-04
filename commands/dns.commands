@@ -1,0 +1,1 @@
+nmap.exe -Pn -p _PORT_ --script=banner,dns-cache-snoop,dns-recursion -oA "dns/_TARGET_._PORT_.script" _TARGET_  > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1

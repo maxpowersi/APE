@@ -1,0 +1,1 @@
+gobuster dir --wildcard --noprogress --quiet -o "_OUTPUT_/_PROTOCOL_/_TARGET_._PORT_.gobuster.txt" -w "_APP_PATH_/brute-force/common_discovery.small.txt" -u "_PROTOCOL_://_TARGET_:_PORT_" & procid=$!; while true; do echo "still running"; done

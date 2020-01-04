@@ -1,0 +1,2 @@
+sslscan "_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.sslscan.txt" 
+timeout 1200 testssl --openssl-timeout 1200 "_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.testssl.txt"

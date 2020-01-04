@@ -1,0 +1,5 @@
+_block:JS_
+wget -q -i "_PROTOCOL_/_TARGET_._PORT_.getJS.txt" -P "_PROTOCOL_/JS"
+retire --jspath "_PROTOCOL_/JS/" --outputformat "text" --outputpath "_PROTOCOL_/_TARGET_._PORT_.retire.txt" > /dev/null 2>&1
+linkfinder -i "_PROTOCOL_/JS/*.js" -o "_PROTOCOL_/_TARGET_._PORT_.linkFinder.html" > /dev/null 2>&1
+_block:JS_

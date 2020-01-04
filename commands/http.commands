@@ -1,0 +1,11 @@
+getJS -url _PROTOCOL_://_TARGET_:_PORT_ -resolve -complete -output _PROTOCOL_/_TARGET_._PORT_.getJS.txt -verbose > /dev/null 2>&1
+nikto -maxtime 15m -output  "_PROTOCOL_/_TARGET_._PORT_.nikto.txt" -host _PROTOCOL_://_TARGET_:_PORT_ > /dev/null
+curl -i -s -o "_PROTOCOL_/_TARGET_._PORT_.curl.txt" "_PROTOCOL_://_TARGET_:_PORT_"
+wappalyzer "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.wappalyzer.json"
+echo _TARGET_ | httprobe -s -p "_PROTOCOL_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.httpProbe.txt"
+webscreenshot.py --no-xserver -r phantomjs -o "_PROTOCOL_/" "_PROTOCOL_://_TARGET_:_PORT_" > /dev/null
+echo "_PROTOCOL_://_TARGET_:_PORT_" | aquatone.exe -silent -out "_PROTOCOL_/_TARGET_._PORT_.aquatone" > /dev/null 2>&1
+webtech -u "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.webtech.txt"
+waybackurls "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.waybackurls.txt"
+photon -u "_PROTOCOL_://_TARGET_:_PORT_" -o "_PROTOCOL_/_TARGET_._PORT_.photon" > /dev/null 2>&1
+goohak "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.goohak.txt"

@@ -1,0 +1,2 @@
+echo "_target_" > "host/_target_.tempFile.txt"; subjack -w "host/_target_.tempFile.txt" -t 10 -timeout 30 -a -ssl -v -o "host/_target_.subjack.txt" > /dev/null 2>&1; rm "host/_target_.tempFile.txt"
+nmap.exe -sSV -O -Pn -vvv --top-ports 1000 _target_ -oA "host/_target_.tcp.top1000" > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1

