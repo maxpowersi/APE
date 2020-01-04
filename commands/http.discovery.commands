@@ -1,1 +1,4 @@
-gobuster dir --wildcard --noprogress --quiet -o "_OUTPUT_/_PROTOCOL_/_TARGET_._PORT_.gobuster.txt" -w "_APP_PATH_/brute-force/common_discovery.small.txt" -u "_PROTOCOL_://_TARGET_:_PORT_" & procid=$!; while true; do echo "still running"; done
+echo "\e[92m--- Running opendoor for target: _TARGET_ ---\e[0m"
+opendoor --host _TARGET_ --reports txt --reports-dir "_OUTPUT_/_DOMAIN_.opendoor.txt"
+echo "\e[92m--- Running gobuster for target: _TARGET_ ---\e[0m"
+gobuster dir --wildcard -v -o "_OUTPUT_/_DOMAIN_.gobuster.txt" -w "_APP_PATH_/brute-force/common_discovery.small.txt" -u "_TARGET_"
