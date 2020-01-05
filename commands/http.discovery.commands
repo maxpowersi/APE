@@ -1,5 +1,5 @@
 echo "\e[92m--- Running dirsearch for target: _TARGET_ ---\e[0m"
-sudo dirsearch -u https://sports.rightsline.com --plain-text-report="_OUTPUT_/_DOMAIN_.dirseach.txt" -e ""
+sudo dirsearch -u _TARGET_ --plain-text-report="_OUTPUT_/_DOMAIN_.dirseach.txt" -e ""
 echo "\e[92m--- Running dirb for target: _TARGET_ ---\e[0m"
 dirb  _TARGET_ -o "_OUTPUT_/_DOMAIN_.dirb.txt" -X ""
 echo "\e[92m--- Running opendoor for target: _TARGET_ ---\e[0m"
