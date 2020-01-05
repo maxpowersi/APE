@@ -46,13 +46,11 @@ commandsFiles =  [("ftp", "ftp.commands", "ftp"),
                   ("https", "https.commands", "https"),
                   ("ssl", "http.commands", "https"),
                   ("https", "http.commands", "https")]
-httpJSService =  [("http", "http.js.commands", "http"), ("ssl", "http.js.commands", "https"), ("https", "http.js.commands", "http")]
-#httpDiscoveryService =  [("http", "http.discovery.commands", "http"), ("ssl", "http.discovery.commands", "https"), ("https", "http.discovery.commands", "https")]
+httpJSService =  [("https", "http.js.commands", "https"), ("http", "http.js.commands", "http"), ("ssl", "http.js.commands", "https")]
 
 hostCommandsRunPath = os.path.join(commandsFolderPath, "host.commands.run")
 scanCommandsRunPath = os.path.join(commandsFolderPath, "scan.commands.run")
 httpJSCommandsRunPath = os.path.join(commandsFolderPath, "http.js.commands.run")
-#httpDiscoveryCommandsRunPath = os.path.join(commandsFolderPath, "http.discovery.commands.run")
 
 servicesFolder =  [os.path.join(scanPath, "http"), 
                    os.path.join(scanPath, "ftp"),
@@ -131,28 +129,6 @@ for tup in httpJSService:
     f.close()
 out.close() 
 
-#consoleWritte("Building http discovery commands list")
-#out = open(httpDiscoveryCommandsRunPath, "w") 
-#for tup in httpDiscoveryService:
-#    service =  tup[0]
-#    commandFileName = tup[1]
-#    protocol =  tup[2]
-#    commandFile = os.path.join(commandsFolderPath, commandFileName)
-#    f = open(commandFile)
-#    for line in f:
-#        newLine = line.rstrip()
-#        if ("_block:" not in newLine and "_blocker_" not in newLine):
-#            newLine = "nmap-parse-output host/_target_.tcp.top1000.xml service '{0}' | cut -d ':' -f2 | while read p; do {1}; done".format(service, newLine)
-#            newLine = newLine.replace("_PORT_", "$p")
-#            newLine = newLine.replace("_TARGET_", "_target_")
-#            newLine = newLine.replace("_OUTPUT_", scanPath)
-#            newLine = newLine.replace("_COMPANY_", "")
-#            newLine = newLine.replace("_APP_PATH_", apePath)
-#            newLine = newLine.replace("_PROTOCOL_", protocol)
-#        out.write(newLine + "\n") 
-#    f.close()
-#out.close() 
-
 consoleWritte("Starting host scan")
 os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -cL '{2}' -threads {3}".format(scanPath, targets, hostCommandsRunPath, queued))
 os.remove(hostCommandsRunPath)
@@ -164,9 +140,5 @@ os.remove(scanCommandsRunPath)
 consoleWritte("Starting http JS scan")
 os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -cL '{2}' -threads {3}".format(scanPath, targets, httpJSCommandsRunPath, queued))
 os.remove(httpJSCommandsRunPath)
-
-#consoleWritte("Starting http discovery scan")
-#os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -cL '{2}' -threads {3}".format(scanPath, targets, httpDiscoveryCommandsRunPath, queued))
-#os.remove(httpDiscoveryCommandsRunPath)
 
 consoleWritte("The scan was finished successfully")

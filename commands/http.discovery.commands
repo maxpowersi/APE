@@ -1,4 +1,4 @@
 echo "\e[92m--- Running opendoor for target: _TARGET_ ---\e[0m"
-opendoor --host _TARGET_ --reports txt --reports-dir "_OUTPUT_/_DOMAIN_.opendoor.txt"
+opendoor --host _TARGET_ --reports txt --reports-dir "_OUTPUT_/_DOMAIN_.opendoor"
 echo "\e[92m--- Running gobuster for target: _TARGET_ ---\e[0m"
 gobuster dir --wildcard -v -o "_OUTPUT_/_DOMAIN_.gobuster.txt" -w "_APP_PATH_/brute-force/common_discovery.small.txt" -u "_TARGET_"
