@@ -7,5 +7,5 @@ webscreenshot.py --no-xserver -r phantomjs -o "_PROTOCOL_/" "_PROTOCOL_://_TARGE
 echo "_PROTOCOL_://_TARGET_:_PORT_" | aquatone.exe -silent -out "_PROTOCOL_/_TARGET_._PORT_.aquatone" > /dev/null 2>&1
 webtech -u "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.webtech.txt"
 waybackurls "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.waybackurls.txt"
-photon -u "_PROTOCOL_://_TARGET_:_PORT_" -o "_PROTOCOL_/_TARGET_._PORT_.photon" > /dev/null 2>&1
+photon -u "_PROTOCOL_://_TARGET_:_PORT_" -o "_PROTOCOL_/_TARGET_._PORT_.photon" -e csv > /dev/null 2>&1
 goohak "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.goohak.txt"

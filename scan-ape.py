@@ -103,6 +103,7 @@ for tup in commandsFiles:
             newLine = newLine.replace("_COMPANY_", "")
             newLine = newLine.replace("_APP_PATH_", apePath)
             newLine = newLine.replace("_PROTOCOL_", protocol)
+            newLine = newLine.replace("_THREADS_", queued)
         out.write(newLine + "\n") 
     f.close()
 out.close() 

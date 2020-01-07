@@ -68,6 +68,7 @@ for tup in commandsFiles:
         newLine = newLine.replace("_OUTPUT_", reconPath)
         newLine = newLine.replace("_COMPANY_", organization)
         newLine = newLine.replace("_APP_PATH_", apePath)
+        newLine = newLine.replace("_THREADS_", threads)
         reconRun.write(newLine + "\n") 
     f.close()
 reconRun.close() 

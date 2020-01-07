@@ -9,10 +9,12 @@ import datetime
 parser = argparse.ArgumentParser(description="")
 parser.add_argument('-t',action="store", dest="targets", help="list of URL in scope, in a text file", required=True)
 parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)
+parser.add_argument('-q', action="store", dest="queued", help="number of queued or threads, each queued will process one resource (IP, subdomain or URL)", required=True)
 parameters = parser.parse_args()
 
 targetsPath = parameters.targets
 scanPath = parameters.outputDir
+threads = parameters.queued
 apePath  =  os.path.dirname(os.path.realpath(__file__))
 commandsFolderPath = os.path.join(apePath, "commands")
 commandsFilePath = os.path.join(commandsFolderPath, "http.discovery.commands")
@@ -27,6 +29,7 @@ for target in targetFile:
         command = command.replace("_DOMAIN_", target.replace("/","").replace(":","").replace("https", "").replace("http", ""))
         command = command.replace("_OUTPUT_", scanPath)
         command = command.replace("_APP_PATH_", apePath)
+        command = command.replace("_THREADS_", threads)
         os.system(command)
 targetFile.close()
 commandsFile.close()
