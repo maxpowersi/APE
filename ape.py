@@ -12,18 +12,23 @@ print("""
 
 parser = argparse.ArgumentParser(description="")
 parser.add_argument('-m',action="store", dest="module", help="module name, it must be recon, scan or all", required=True)
+parser.add_argument('-nhs', action="store_true", dest="noHostScan", help="if its presents, host scan will be executed")
 parser.add_argument('-t',action="store", dest="target", help="target, for recon it must be a domain, for scan it must be a text file with subdomains or IPs", required=True)
 parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)
 parser.add_argument('-q', action="store", dest="queued", help="number of queued or threads, each queued will process one resource (IP, subdomain or URL)", required=True)
 parameters = parser.parse_args()
 
-if not parameters.module.lower() in ["scan", "recon"]:
-    print("The argument -m (module) is invalid, it must be recon or scan")
+if not parameters.module.lower() in ["scan", "recon", "httpdiscovery"]:
+    print("The argument -m (module) is invalid, it must be recon, scan or httpdiscovery")
     sys.exit()
 
+noHostScan = False
 module = parameters.module.lower()
 isScan = module == "scan"
 isRecon = module == "recon"
+
+if parameters.noHostScan:
+    noHostScan = True
 
 if isRecon:
     if not validators.domain(parameters.target):
@@ -48,9 +53,12 @@ queued = parameters.queued
 projectPath = parameters.outputDir
 
 if isScan:
-    os.system("python3 '{3}/scan-ape.py' -t '{0}' -o '{1}' -q {2} ".format(target, projectPath, queued, apePath))
+    if noHostScan:
+        os.system("python3 '{3}/scan-ape.py' -t '{0}' -o '{1}' -q {2} -nhs".format(target, projectPath, queued, apePath))
+    else:
+        os.system("python3 '{3}/scan-ape.py' -t '{0}' -o '{1}' -q {2}".format(target, projectPath, queued, apePath))
 else:
     if isRecon:
         os.system("python3 '{3}/recon-ape.py' -t '{0}' -o '{1}' -q {2}".format(target, projectPath, queued, apePath))
     else:
-         os.system("python3 '{3}/http-discovery.py.py' -t '{0}' -o '{1}' -q {2}".format(target, projectPath, queued, apePath))
+         os.system("python3 '{3}/http-discovery.py' -t '{0}' -o '{1}' -q {2}".format(target, projectPath, queued, apePath))

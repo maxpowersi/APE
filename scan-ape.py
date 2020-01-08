@@ -9,6 +9,7 @@ def consoleWritte(msg):
     os.system("printf \"\e[92m--- {0} ---\e[0m\n\n\"".format(msg))
 
 parser = argparse.ArgumentParser(description="")
+parser.add_argument('-nhs', action="store_true", dest="noHostScan", help="if its presents, host scan will be executed")
 parser.add_argument('-t',action="store", dest="targets", help="list of IPs in scope, in a text file", required=True)
 parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)
 parser.add_argument('-q', action="store", dest="queued", help="number of queued, each queued will process one resource (IP or subdomain)", required=True)
@@ -29,6 +30,10 @@ if not validators.between(int(parameters.queued), min=1, max=50):
 queued = parameters.queued
 targets = parameters.targets
 projectPath = parameters.outputDir
+noHostScan = False
+
+if parameters.noHostScan:
+    noHostScan = True
 
 apePath = os.path.dirname(os.path.realpath(__file__))
 scanPath = os.path.join(projectPath, "scan")
@@ -130,8 +135,11 @@ for tup in httpJSService:
     f.close()
 out.close() 
 
-consoleWritte("Starting host scan")
-os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -cL '{2}' -threads {3}".format(scanPath, targets, hostCommandsRunPath, queued))
+if noHostScan:
+    consoleWritte("Host scan skipped")
+else:    
+    consoleWritte("Starting host scan")
+    os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -cL '{2}' -threads {3}".format(scanPath, targets, hostCommandsRunPath, queued))
 os.remove(hostCommandsRunPath)
 
 consoleWritte("Starting services scan")
