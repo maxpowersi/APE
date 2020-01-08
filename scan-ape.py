@@ -139,8 +139,21 @@ if noHostScan:
     consoleWritte("Host scan skipped")
 else:    
     consoleWritte("Starting host scan")
-    os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -cL '{2}' -threads {3}".format(scanPath, targets, hostCommandsRunPath, queued))
+    #os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -cL '{2}' -threads {3}".format(scanPath, targets, hostCommandsRunPath, queued))
+    os.system("cd {0}; sh '{1}/nmapConvertFix.sh'".format(os.path.join(scanPath, "host"), apePath))
+    with open(os.path.join(scanPath, "nmapToConvert.tmp.txt")) as f:
+        for line in f:
+            parsedLine = line.split(":")
+            toEditFile  = parsedLine[0]
+            toEditLine  = int(parsedLine[1])
+            toEditFilePath = os.path.join(os.path.join(os.path.join(scanPath, "host"), toEditFile))
+            with open(toEditFilePath, 'r') as fileStream:
+                data = fileStream.readlines()
+                data[toEditLine - 1] = data[toEditLine - 1].replace('name="http"', 'name="https"')
+            with open(toEditFilePath, 'w') as fileStream:
+                fileStream.writelines(data)
 os.remove(hostCommandsRunPath)
+os.remove(os.path.join(scanPath, "nmapToConvert.tmp.txt"))
 
 consoleWritte("Starting services scan")
 os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -cL '{2}' -threads {3}".format(scanPath, targets, scanCommandsRunPath, queued))
