@@ -65,11 +65,15 @@ This module will run all host or network scan tools in the file "host.commands.t
 	- banner
 	- ssh-auth-methods
 	- sshv1
+	- vuln
+	- vulscan
 ### Telnet
 - ncrack
 - nmap scripts
 	- banner
 	- telnet-ntlm-info
+	- vuln
+	- vulscan
 ### FTP
 - ncrack
 - nmap scripts
@@ -77,23 +81,31 @@ This module will run all host or network scan tools in the file "host.commands.t
 	- ftp-anon
 	- ftp-bounce
 	- ftp-syst
+	- vuln
+	- vulscan
 ### DNS
 - nmap scripts
 	- banner
 	- dns-cache-snoop
 	- dns-recursion
+	- vuln
+	- vulscan
 ### SMTP
 - smtp-user-enum
 - nmap scripts
 	- banner
 	- smtp-open-relay
 	- smtp-commands
+	- vuln
+	- vulscan
 ### RDP
 - ncrack
 - nmap scripts
 	- banner
 	- rdp-ntlm-info
 	- rdp-vuln-ms12-020
+	- vuln
+	- vulscan
 ### SMB
 - nmap scripts
 	- banner
@@ -101,6 +113,8 @@ This module will run all host or network scan tools in the file "host.commands.t
 	- smb-enum-shares
 	- smb-vuln-ms17-010
 	- smb-enum-users
+	- vuln
+	- vulscan
 ### Adding new tools
 You can add you own tools, editing the command files.
 ## Help
