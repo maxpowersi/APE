@@ -1,3 +1,4 @@
+nmap.exe -Pn -sSV -p _PORT_ --script=banner,vuln,vulscan/vulscan.nse,http-enum,http-webdav-scan,http-backup-finder,http-trace _TARGET_-oA "_PROTOCOL_/_TARGET_._PORT_.script" > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1
 getJS -url _PROTOCOL_://_TARGET_:_PORT_ -resolve -complete -output _PROTOCOL_/_TARGET_._PORT_.getJS.txt -verbose > /dev/null 2>&1
 nikto -maxtime 15m -output  "_PROTOCOL_/_TARGET_._PORT_.nikto.txt" -host _PROTOCOL_://_TARGET_:_PORT_ > /dev/null
 curl -i -s -o "_PROTOCOL_/_TARGET_._PORT_.curl.txt" "_PROTOCOL_://_TARGET_:_PORT_"

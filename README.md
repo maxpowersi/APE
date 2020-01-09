@@ -100,6 +100,7 @@ This module will run all host or network scan tools in the file "host.commands.t
 	- smb-protocols
 	- smb-enum-shares
 	- smb-vuln-ms17-010
+	- smb-enum-users
 ### Adding new tools
 You can add you own tools, editing the command files.
 ## Help
