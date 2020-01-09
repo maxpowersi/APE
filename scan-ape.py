@@ -139,7 +139,7 @@ if noHostScan:
     consoleWritte("Host scan skipped")
 else:    
     consoleWritte("Starting host scan")
-    #os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -cL '{2}' -threads {3}".format(scanPath, targets, hostCommandsRunPath, queued))
+    os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -cL '{2}' -threads {3}".format(scanPath, targets, hostCommandsRunPath, queued))
     os.system("cd {0}; sh '{1}/nmapConvertFix.sh'".format(os.path.join(scanPath, "host"), apePath))
     with open(os.path.join(scanPath, "nmapToConvert.tmp.txt")) as f:
         for line in f:
