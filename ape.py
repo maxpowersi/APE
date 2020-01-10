@@ -12,7 +12,7 @@ print("""
 
 parser = argparse.ArgumentParser(description="")
 parser.add_argument('-m',action="store", dest="module", help="module name, it must be recon, scan or all", required=True)
-parser.add_argument('-e',action="store_true", dest="extensions", help="extensions, coma separeted", default="")
+parser.add_argument('-e',action="store", dest="extensions", help="extensions, coma separeted", default="")
 parser.add_argument('-nhs', action="store_true", dest="noHostScan", help="if its presents, host scan will be executed")
 parser.add_argument('-t',action="store", dest="target", help="target, for recon it must be a domain, for scan it must be a text file with subdomains or IPs", required=True)
 parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)

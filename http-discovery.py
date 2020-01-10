@@ -32,8 +32,12 @@ for target in targetFile:
         command = command.replace("_OUTPUT_", scanPath)
         command = command.replace("_APP_PATH_", apePath)
         command = command.replace("_THREADS_", threads)
-        command = command.replace("_EXTENSIONS_NOT_DOT", extensions.replace(".", ""))
-        command = command.replace("_EXTENSIONS_", extensions)
+        if(extensions is not ""):
+            command = command.replace("_EXTENSIONS_NOT_DOT", "," + extensions.replace(".", ""))
+            command = command.replace("_EXTENSIONS_", "," + extensions)
+        else:
+            command = command.replace("_EXTENSIONS_NOT_DOT", "")
+            command = command.replace("_EXTENSIONS_", "")
         if "echo" not in command:
             print('\033[93m' + command + '\033[0m')
         os.system(command)
