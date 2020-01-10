@@ -8,11 +8,13 @@ import datetime
 
 parser = argparse.ArgumentParser(description="")
 parser.add_argument('-t',action="store", dest="targets", help="list of URL in scope, in a text file", required=True)
+parser.add_argument('-e',action="store", dest="extensions", help="extensions, coma separeted", default="")
 parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)
 parser.add_argument('-q', action="store", dest="queued", help="number of queued or threads, each queued will process one resource (IP, subdomain or URL)", required=True)
 parameters = parser.parse_args()
 
 targetsPath = parameters.targets
+extensions = parameters.extensions
 scanPath = parameters.outputDir
 threads = parameters.queued
 apePath  =  os.path.dirname(os.path.realpath(__file__))
@@ -30,6 +32,9 @@ for target in targetFile:
         command = command.replace("_OUTPUT_", scanPath)
         command = command.replace("_APP_PATH_", apePath)
         command = command.replace("_THREADS_", threads)
+        command = command.replace("_EXTENSIONS_NOT_DOT", extensions.replace(".", ""))                
+        command = command.replace("_EXTENSIONS_", extensions)
+        print(command)
         os.system(command)
 targetFile.close()
 commandsFile.close()

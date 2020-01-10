@@ -12,6 +12,7 @@ print("""
 
 parser = argparse.ArgumentParser(description="")
 parser.add_argument('-m',action="store", dest="module", help="module name, it must be recon, scan or all", required=True)
+parser.add_argument('-e',action="store_true", dest="extensions", help="extensions, coma separeted", default="")
 parser.add_argument('-nhs', action="store_true", dest="noHostScan", help="if its presents, host scan will be executed")
 parser.add_argument('-t',action="store", dest="target", help="target, for recon it must be a domain, for scan it must be a text file with subdomains or IPs", required=True)
 parser.add_argument('-o', action="store", dest="outputDir", help="path to place all outputs", required=True)
@@ -22,6 +23,7 @@ if not parameters.module.lower() in ["scan", "recon", "httpdiscovery"]:
     print("The argument -m (module) is invalid, it must be recon, scan or httpdiscovery")
     sys.exit()
 
+extensions = parameters.extensions
 noHostScan = False
 module = parameters.module.lower()
 isScan = module == "scan"
@@ -61,4 +63,7 @@ else:
     if isRecon:
         os.system("python3 '{3}/recon-ape.py' -t '{0}' -o '{1}' -q {2}".format(target, projectPath, queued, apePath))
     else:
-         os.system("python3 '{3}/http-discovery.py' -t '{0}' -o '{1}' -q {2}".format(target, projectPath, queued, apePath))
+        if extensions is not "":
+             os.system("python3 '{3}/http-discovery.py' -t '{0}' -o '{1}' -q {2} -e {4}".format(target, projectPath, queued, apePath, extensions))
+        else:
+             os.system("python3 '{3}/http-discovery.py' -t '{0}' -o '{1}' -q {2}".format(target, projectPath, queued, apePath))
