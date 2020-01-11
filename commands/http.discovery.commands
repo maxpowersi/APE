@@ -8,3 +8,5 @@ echo "\e[92m--- Running gobuster (only slash) for target: _TARGET_ ---\e[0m"
 gobuster dir -v -e -o "_OUTPUT_/_DOMAIN_.gobuster.slash.txt" -w "_APP_PATH_/brute-force/common_discovery.small.txt" -u "_TARGET_" -f
 echo "\e[92m--- Running opendoor for target: _TARGET_ ---\e[0m"
 opendoor --host _TARGET_ --reports txt --reports-dir "_OUTPUT_/_DOMAIN_.opendoor" -e ",html,js,xml,sql,txt,bak,zip_EXTENSIONS_NOT_DOT"
+echo "\e[92m--- Running gobuster extra large for target: _TARGET_ ---\e[0m"
+gobuster dir -v -e -o "_OUTPUT_/_DOMAIN_.gobuster.extralarge.txt" -w "_APP_PATH_/brute-force/common_discovery.extralarge.txt" -u "_TARGET_" -f

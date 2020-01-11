@@ -10,3 +10,5 @@ common_usernames.small.txt is from:
 https://github.com/jeanphorn/wordlist/blob/master/usernames.txt
 common_usernames.large.txt is from:
 https://weakpass.com/wordlist/1192
+common_discovery.extralarge.txt is from:
+SecLists/Discovery/Web-Content (all list concatenated)
