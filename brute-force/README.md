@@ -15,7 +15,7 @@ https://gist.github.com/jhaddix/b80ea67d85c13206125806f0828f4d10 and common_disc
 - common_discovery.extralarge.txt is from:
 https://github.com/danielmiessler/SecLists/tree/master/Discovery/Web-Content (all list concatenated) and common_discovery.large.txt
 
-## USernames
+## Usernames
 - common_usernames.small.txt is from:
 https://github.com/jeanphorn/wordlist/blob/master/usernames.txt
 
