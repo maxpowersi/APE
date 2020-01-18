@@ -6,3 +6,4 @@ timeout 900 gitrob -silent -save "_TARGET_.gitrob.json" "_COMPANY_" &> /dev/null
 cd "_APP_PATH_/brute-force/"; bucketeer "_COMPANY_" > "_OUTPUT_/_TARGET_.bucketeer.txt" &> /dev/null
 (amass.exe enum -d "_TARGET_" -active -oA "_TARGET_.amass.subdomain") > /dev/null 2>&1
 (sublist3r -d _TARGET_ -o "_TARGET_.sublist3r.subdomain.txt" -e yahoo,baidu,google,bing,ask,netcraft,virustotal,threatcrowd,ssl,passivedns) > /dev/null 2>&1
+assetfinder _TARGET_ > -o "_TARGET_.assetfinder.subdomain.txt"

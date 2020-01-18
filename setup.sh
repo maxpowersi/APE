@@ -8,18 +8,21 @@ sudo apt-get install sslscan
 sudo apt-get install nikto
 pip install validators
 pip install webtech
+pip3 install dirhunt
 npm install -g retire
 npm i -g wappalyzer
 go get github.com/OJ/gobuster
 go get -u github.com/tomnomnom/httprobe
 go get github.com/003random/getJS
 go get github.com/tomnomnom/waybackurls
-#TODO Extract the  zip, and add to the path the tools
+go get -u github.com/tomnomnom/assetfinder
+go get github.com/hakluke/hakrawler
+#TODO: Extract the  zip, and add to the path the tools
 wget https://github.com/OWASP/Amass/releases/download/v3.2.0/amass_v3.2.0_linux_amd64.zip
 wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 
 wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
 wget https://testssl.sh/testssl.sh
-#TODO go to repo and install the tool, and add to the path
+#TODO; go to repo and install the tool, and add to the path
 git clone https://github.com/ernw/nmap-parse-output.git
 git clone https://github.com/codingo/Interlace.git
 git clone https://github.com/ernw/nmap-parse-output.git
