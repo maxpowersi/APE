@@ -25,6 +25,7 @@ This module will run all recon tools in the file "recon.commands.txt". By defaul
 - OWASP amass
 - Subfinder
 - knockpy
+- assetfinder
 - Gitrob
 - bucketeer
 
@@ -55,8 +56,6 @@ This module will run all host or network scan tools in the file "host.commands.t
 - linkfinder
 - photon
 - Goohak
-- gobuster
-- opendoor
 ### SSH
 - ncrack
 - ssh-user-enumeration
@@ -115,6 +114,11 @@ This module will run all host or network scan tools in the file "host.commands.t
 	- smb-enum-users
 	- vuln
 	- vulscan
+### HTTP Discovery
+- dirsearch (default list, using most commons extension, directory and no extension)
+- dirb (default list, using most commons extension, directory and no extension)
+- opendoor (default list, using most commons extension, directory and no extension)
+- gobuster (using custom lists)
 ### Adding new tools
 You can add you own tools, editing the command files.
 ## Help
