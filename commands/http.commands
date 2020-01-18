@@ -9,5 +9,5 @@ webtech -u "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.webtech.
 waybackurls "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.waybackurls.txt"
 photon -u "_PROTOCOL_://_TARGET_:_PORT_" -o "_PROTOCOL_/_TARGET_._PORT_.photon" -e csv > /dev/null 2>&1
 goohak "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.goohak.txt"
-hakrawler "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.hakrawler.txt"
+hakrawler -url "_PROTOCOL_://_TARGET_:_PORT_" -all > "_PROTOCOL_/_TARGET_._PORT_.hakrawler.txt"
 dirhunt "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.dirhunt.txt"
