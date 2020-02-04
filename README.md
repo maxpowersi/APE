@@ -43,16 +43,16 @@ This module will run all host or network scan tools in the file "host.commands.t
 - testssl
 - sslscan
 ### HTTP & HTTPS
+The HTTP Scane is divide in sequencial pipelines.
+### First Pipeline (Web App Scan)
 - nikto
 - getJS
-- retire
 - curl
 - wappalyzer
 - webscreenshot
 - aquatone
 - webtech
 - waybackurls
-- linkfinder
 - photon
 - h2t
 - hakrawler
@@ -60,6 +60,17 @@ This module will run all host or network scan tools in the file "host.commands.t
 - corsy
 - corstest
 - dirhunt
+- see-surf (SSRF)
+### First Pipeline (JS Scan)
+- retire
+- linkfinder
+### Last Pipieline (HTTP Content discoveryt Discovery)
+Must be invoke in a manually way. Please for more information, read the help.
+- dirsearch (default list, using most commons extension, directory and no extension)
+- dirb (default list, using most commons extension, directory and no extension)
+- opendoor (default list, using most commons extension, directory and no extension)
+- gobuster (using custom list, most commons extension and no extension)
+- gobuster (using custom list, only directory)
 ### SSH
 - ncrack
 - ssh-user-enumeration
@@ -118,11 +129,6 @@ This module will run all host or network scan tools in the file "host.commands.t
 	- smb-enum-users
 	- vuln
 	- vulscan
-### HTTP Discovery
-- dirsearch (default list, using most commons extension, directory and no extension)
-- dirb (default list, using most commons extension, directory and no extension)
-- opendoor (default list, using most commons extension, directory and no extension)
-- gobuster (using custom lists)
 ### Adding new tools
 You can add you own tools, editing the command files.
 ## Help
@@ -149,5 +155,9 @@ ape.py -m recon -t "domain.com" -o "/home/user/" -q 30
 ```
 ## Scan
 ```
-ape.py -m scan -t "/home/user/domain.com/recon/ips-unique.txt" -o "/home/user/domain.com/ -q 30
+ape.py -m scan -t "/home/user/domain.com/recon/subdomains.txt" -o "/home/user/domain.com/ -q 30
+```
+## HTTP Content discovery
+```
+ape.py -m httpdiscovery -t "/home/user/domain.com/urls.txt" -o "/home/user/domain.com/scan/http-discovery" -q 30 [-e .php,.aspx]
 ```

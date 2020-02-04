@@ -164,4 +164,9 @@ consoleWritte("Starting http JS scan")
 os.system("cd '{0}'; interlace -timeout 1200 -tL '{1}' -cL '{2}' -threads {3}".format(scanPath, targets, httpJSCommandsRunPath, queued))
 os.remove(httpJSCommandsRunPath)
 
+#consoleWritte("Starting http endpoints scan")
+#Search echa .photon folder, get endpoints.txt and run the next commands.
+#os.system("sed -i 's/\\n/\n/g' {0}".format())
+#After that, run a http.endpoints.commands to each file.
+
 consoleWritte("The scan was finished successfully")
