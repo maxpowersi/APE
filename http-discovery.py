@@ -22,9 +22,9 @@ commandsFolderPath = os.path.join(apePath, "commands")
 commandsFilePath = os.path.join(commandsFolderPath, "http.discovery.commands")
 
 targetFile = open(targetsPath)
-commandsFile = open(commandsFilePath)
 for target in targetFile:
     target = target.rstrip()
+    commandsFile = open(commandsFilePath)
     for command in commandsFile:
         command = command.rstrip()
         command = command.replace("_TARGET_", target)

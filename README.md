@@ -43,7 +43,7 @@ This module will run all host or network scan tools in the file "host.commands.t
 - testssl
 - sslscan
 ### HTTP & HTTPS
-The HTTP Scane is divide in sequencial pipelines.
+The HTTP Scaner is divide in sequencial 3 pipelines.
 ### First Pipeline (Web App Scan)
 - nikto
 - getJS
@@ -61,10 +61,10 @@ The HTTP Scane is divide in sequencial pipelines.
 - corstest
 - dirhunt
 - see-surf (SSRF)
-### First Pipeline (JS Scan)
+### Second Pipeline (JS Scan)
 - retire
 - linkfinder
-### Last Pipieline (HTTP Content discoveryt Discovery)
+### Last Pipeline (HTTP content discovery)
 Must be invoke in a manually way. Please for more information, read the help.
 - dirsearch (default list, using most commons extension, directory and no extension)
 - dirb (default list, using most commons extension, directory and no extension)
