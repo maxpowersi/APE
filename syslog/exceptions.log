@@ -1,1 +1,0 @@
-2020-02-12 11:58:47 [ERROR] : SocketError: [Errno -3] Temporary failure in name resolution in /usr/local/lib/python3.7/dist-packages/opendoor-3.4.481-py3.7.egg/src/lib/browser/exceptions.py -> __init__() line 25

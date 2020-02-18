@@ -15,3 +15,4 @@ h2t scan "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.h2t.txt"
 corsy -u "_PROTOCOL_://_TARGET_:_PORT_" -o "_TARGET_._PORT_"
 cat "_PROTOCOL_://_TARGET_:_PORT_" > "_TARGET_._PORT_.corstest.input.txt"; corstest "_TARGET_._PORT_.corstest.input.txt" > "_PROTOCOL_/_TARGET_._PORT_.corstest.txt"; rm  "_TARGET_._PORT_.corstest.input.txt"
 see-surf -H "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.see-surf.txt"
+gospider -s "_PROTOCOL_://_TARGET_:_PORT_" -o "_PROTOCOL_/_TARGET_._PORT_.gospider" -c 10 -d 2

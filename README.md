@@ -61,6 +61,7 @@ The HTTP Scaner is divide in sequencial 3 pipelines.
 - corstest
 - dirhunt
 - see-surf (SSRF)
+- gospider
 ### Second Pipeline (JS Scan)
 - retire
 - linkfinder
