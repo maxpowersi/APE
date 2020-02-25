@@ -44,4 +44,5 @@ git clone https://github.com/In3tinct/See-SURF.git
 git clone https://github.com/Nekmo/dirhunt.git
 git clone https://github.com/hakluke/hakrawler.git
 git clone https://github.com/bl4ckmamb4/OpenRelayMagic.git
+git clone https://github.com/tismayil/ohmybackup.git
 #TODO; go to repo and install the tool, and add to the path

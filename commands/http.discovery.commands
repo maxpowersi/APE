@@ -1,3 +1,6 @@
+echo "\e[92m--- Running ohmybackup for target: _TARGET_ ---\e[0m"
+cp -r "_APP_PATH_/brute-force/files/" ./
+ohmybackup --hostname "_TARGET_" > "_OUTPUT_/_DOMAIN_.ohmybackup.txt"
 echo "\e[92m--- Running dirsearch for target: _TARGET_ ---\e[0m"
 sudo dirsearch -u _TARGET_ --plain-text-report="_OUTPUT_/_DOMAIN_.dirseach.txt" -e ",html,js,xml,sql,txt,bak,zip_EXTENSIONS_NOT_DOT" -t _THREADS_
 echo "\e[92m--- Running dirb for target: _TARGET_ ---\e[0m"

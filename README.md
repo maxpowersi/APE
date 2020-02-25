@@ -68,6 +68,7 @@ The HTTP Scaner is divide in sequencial 3 pipelines.
 - linkfinder
 ### Last Pipeline (HTTP content discovery)
 Must be invoke in a manually way. Please for more information, read the help.
+- ohmybackup (short list, searching for backups)
 - dirsearch (default list, using most commons extension, directory and no extension)
 - dirb (default list, using most commons extension, directory and no extension)
 - opendoor (default list, using most commons extension, directory and no extension)
