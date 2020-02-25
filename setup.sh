@@ -17,6 +17,8 @@ go get github.com/003random/getJS
 go get github.com/tomnomnom/waybackurls
 go get -u github.com/tomnomnom/assetfinder
 go get github.com/hakluke/hakrawler
+go get github.com/tismayil/ohmybackup.git
+go get github.com/tismayil/fockcache.git
 wget https://github.com/OWASP/Amass/releases/download/v3.2.0/amass_v3.2.0_linux_amd64.zip
 wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 
 wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
@@ -44,6 +46,5 @@ git clone https://github.com/In3tinct/See-SURF.git
 git clone https://github.com/Nekmo/dirhunt.git
 git clone https://github.com/hakluke/hakrawler.git
 git clone https://github.com/bl4ckmamb4/OpenRelayMagic.git
-git clone https://github.com/tismayil/ohmybackup.git
 git clone https://github.com/s0md3v/XSStrike.git
 #TODO; go to repo and install the tool, and add to the path

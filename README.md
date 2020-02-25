@@ -64,6 +64,7 @@ The HTTP Scaner is divide in sequencial 3 pipelines.
 - gospider
 - injectus (TODO)
 - XSStrike
+- fockcache
 ### Second Pipeline (JS Scan)
 - retire
 - linkfinder

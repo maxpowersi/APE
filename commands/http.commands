@@ -17,3 +17,4 @@ cat "_PROTOCOL_://_TARGET_:_PORT_" > "_TARGET_._PORT_.corstest.input.txt"; corst
 see-surf -H "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.see-surf.txt"
 gospider -s "_PROTOCOL_://_TARGET_:_PORT_" -o "_PROTOCOL_/_TARGET_._PORT_.gospider" -c 10 -d 2
 xsstrike -u "_PROTOCOL_://_TARGET_:_PORT_" --crawl -l 4 > "_PROTOCOL_/_TARGET_._PORT_.xsstrike.txt"
+fockcache --hostname "_PROTOCOL_://_TARGET_:_PORT_" > "_PROTOCOL_/_TARGET_._PORT_.fockcache.txt"
