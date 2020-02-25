@@ -45,4 +45,5 @@ git clone https://github.com/Nekmo/dirhunt.git
 git clone https://github.com/hakluke/hakrawler.git
 git clone https://github.com/bl4ckmamb4/OpenRelayMagic.git
 git clone https://github.com/tismayil/ohmybackup.git
+git clone https://github.com/s0md3v/XSStrike.git
 #TODO; go to repo and install the tool, and add to the path

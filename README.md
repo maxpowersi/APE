@@ -63,6 +63,7 @@ The HTTP Scaner is divide in sequencial 3 pipelines.
 - see-surf (SSRF)
 - gospider
 - injectus (TODO)
+- XSStrike
 ### Second Pipeline (JS Scan)
 - retire
 - linkfinder
