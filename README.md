@@ -62,6 +62,7 @@ The HTTP Scaner is divide in sequencial 3 pipelines.
 - dirhunt
 - see-surf (SSRF)
 - gospider
+- injectus (TODO)
 ### Second Pipeline (JS Scan)
 - retire
 - linkfinder
@@ -107,6 +108,7 @@ Must be invoke in a manually way. Please for more information, read the help.
 	- vulscan
 ### SMTP
 - smtp-user-enum
+- OpenReleayMagic
 - nmap scripts
 	- banner
 	- smtp-open-relay

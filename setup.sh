@@ -39,8 +39,9 @@ git clone https://github.com/1N3/Goohak.git
 git clone https://github.com/haccer/subjack.git
 git clone https://github.com/Rhynorater/CVE-2018-15473-Exploit.git
 git clone https://github.com/arthepsy/ssh-audit.git
-git clone https://github.com/BountyStrike/Injectus
-git clone https://github.com/In3tinct/See-SURF
-git clone https://github.com/Nekmo/dirhunt
-git clone https://github.com/hakluke/hakrawler
+git clone https://github.com/BountyStrike/Injectus.git
+git clone https://github.com/In3tinct/See-SURF.git
+git clone https://github.com/Nekmo/dirhunt.git
+git clone https://github.com/hakluke/hakrawler.git
+git clone https://github.com/bl4ckmamb4/OpenRelayMagic.git
 #TODO; go to repo and install the tool, and add to the path

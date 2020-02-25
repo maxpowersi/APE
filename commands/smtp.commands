@@ -1,2 +1,3 @@
 nmap.exe -Pn -sSV -p _PORT_ --script=vuln,vulscan/vulscan.nse,banner,smtp-open-relay,smtp-commands -oA "smtp/_TARGET_._PORT_.script" _TARGET_  > /dev/null 2>&1 & tail --pid=$! -f /dev/null 2>&1 
 smtp-user-enum -U "_APP_PATH_/brute-force/common_usernames.small.txt" -M VRFY -t _TARGET_ -p _PORT_ > "_OUTPUT_/smtp/_TARGET_._PORT_.smtp-user-enum.txt"
+checker -t _TARGET_ -p _PORT_ -o  "_OUTPUT_/smtp/_TARGET_._PORT_.openRelayMagic.txt"
