@@ -1,0 +1,15 @@
+_block:JS_
+nmap-parse-output host/_target_.tcp.top1000.xml service 'https' | cut -d ':' -f2 | while read p; do wget -q -i "https/_target_.$p.getJS.txt" -P "https/JS"; done
+nmap-parse-output host/_target_.tcp.top1000.xml service 'https' | cut -d ':' -f2 | while read p; do retire --jspath "https/JS/" --outputformat "text" --outputpath "https/_target_.$p.retire.txt" > /dev/null 2>&1; done
+nmap-parse-output host/_target_.tcp.top1000.xml service 'https' | cut -d ':' -f2 | while read p; do linkfinder -i "https/JS/*.js" -o "https/_target_.$p.linkFinder.html" > /dev/null 2>&1; done
+_block:JS_
+_block:JS_
+nmap-parse-output host/_target_.tcp.top1000.xml service 'http' | cut -d ':' -f2 | while read p; do wget -q -i "http/_target_.$p.getJS.txt" -P "http/JS"; done
+nmap-parse-output host/_target_.tcp.top1000.xml service 'http' | cut -d ':' -f2 | while read p; do retire --jspath "http/JS/" --outputformat "text" --outputpath "http/_target_.$p.retire.txt" > /dev/null 2>&1; done
+nmap-parse-output host/_target_.tcp.top1000.xml service 'http' | cut -d ':' -f2 | while read p; do linkfinder -i "http/JS/*.js" -o "http/_target_.$p.linkFinder.html" > /dev/null 2>&1; done
+_block:JS_
+_block:JS_
+nmap-parse-output host/_target_.tcp.top1000.xml service 'ssl' | cut -d ':' -f2 | while read p; do wget -q -i "https/_target_.$p.getJS.txt" -P "https/JS"; done
+nmap-parse-output host/_target_.tcp.top1000.xml service 'ssl' | cut -d ':' -f2 | while read p; do retire --jspath "https/JS/" --outputformat "text" --outputpath "https/_target_.$p.retire.txt" > /dev/null 2>&1; done
+nmap-parse-output host/_target_.tcp.top1000.xml service 'ssl' | cut -d ':' -f2 | while read p; do linkfinder -i "https/JS/*.js" -o "https/_target_.$p.linkFinder.html" > /dev/null 2>&1; done
+_block:JS_
